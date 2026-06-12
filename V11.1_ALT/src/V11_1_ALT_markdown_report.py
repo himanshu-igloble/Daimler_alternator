@@ -94,7 +94,7 @@ def main() -> None:
     L.append("")
     L.append(
         "**What V11.1 asked:** Can covariate signals derived from the V11 "
-        "heuristic channels (x1 = log-lifetime GED+compound exceedance count; "
+        "heuristic channels (x1 = log-lifetime crank-recovery exceedance count (days with crank_recovery_t > healthy-fleet p95); "
         "x2 = trailing compound-vote indicator) allow an Accelerated Failure "
         "Time (AFT) model to deliver per-truck RUL estimates that beat the "
         "fleet-clock dummy?"
@@ -162,7 +162,7 @@ def main() -> None:
     var_rows = []
     for vname, vm, desc in [
         ("M0", m0, "Baseline — no covariates"),
-        ("M1", m1, "x1 = log lifetime GED+compound exceedances"),
+        ("M1", m1, "x1 = log lifetime crank-recovery exceedance days"),
         ("M2", m2, "x1 + x2 trailing compound-vote"),
     ]:
         var_rows.append({
@@ -186,7 +186,7 @@ def main() -> None:
     L.append("### 2b. Why x1 failed — the exposure confound")
     L.append("")
     L.append(
-        "x1 = log(lifetime count of days where GED=2 or compound-vote ≥ 2) "
+        "x1 = log1p(lifetime count of trusted days with crank_recovery_t above the healthy-fleet p95) "
         "was intended to capture electrical stress history. "
         "However, non-failed trucks **accumulate more lifetime exceedances "
         "because they live longer**: the signal is a proxy for age, not "

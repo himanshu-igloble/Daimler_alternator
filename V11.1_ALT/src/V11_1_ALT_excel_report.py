@@ -133,7 +133,7 @@ def main() -> None:
     variant_rows = []
     for vname, vm, desc in [
         ("M0", m0, "Baseline — no covariates; M0 ≡ V10.6.2 fleet curve"),
-        ("M1", m1, "x1 = log lifetime GED+compound exceedances (exposure-confounded)"),
+        ("M1", m1, "x1 = log lifetime crank-recovery exceedance days (exposure-confounded)"),
         ("M2", m2, "x1 + x2 trailing compound-vote"),
     ]:
         h270 = vm["per_horizon_mae"].get("270", "")
