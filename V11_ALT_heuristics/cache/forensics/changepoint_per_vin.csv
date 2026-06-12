@@ -1,0 +1,11 @@
+vin_label,cp_resid_lead_days,cp_resting_lead_days,dose_knee_lead_days,resting_slope,resting_slope_nf_p05,resting_slope_disc
+VIN9_F_ALT,599.0,220.0,270.0,-0.00061,-0.00145,False
+VIN10_F_ALT,279.0,223.0,170.0,-0.00166,-0.00145,True
+VIN1_F_ALT,447.0,235.0,150.0,-0.00414,-0.00145,True
+VIN3_F_ALT,,417.0,137.0,-0.00122,-0.00145,False
+VIN7_F_ALT,297.0,517.0,462.0,-0.00015,-0.00145,False
+VIN6_F_ALT,61.0,111.0,153.0,-0.00022,-0.00145,False
+VIN4_F_ALT,516.0,406.0,362.0,-0.00186,-0.00145,True
+VIN5_F_ALT,263.0,,83.0,0.00044,-0.00145,False
+VIN2_F_ALT,374.0,,80.0,-0.00087,-0.00145,False
+VIN8_F_ALT,281.0,422.0,363.0,-0.00135,-0.00145,False
