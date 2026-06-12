@@ -166,8 +166,10 @@ def g5_crank_recovery_trajectories():
         ax.set_xlabel("days before failure")
         ax.legend(loc="upper right", frameon=False, fontsize=8)
     axes[0].set_ylabel("post-crank voltage recovery time (s)")
-    fig.suptitle("MVP signal: post-crank voltage recovery slows before failure (#3)",
-                 fontweight="bold", y=1.02)
+    fig.suptitle("Post-crank recovery (#3): episodic slow-recovery events exceed the near-zero "
+                 "healthy baseline\n(isolated spikes, not a smooth trend; VIN9's events span its "
+                 "whole life — read with the z-magnitude caveat)",
+                 fontweight="bold", fontsize=11, y=1.06)
     return _save(fig, "G5_crank_recovery_trajectories")
 
 
