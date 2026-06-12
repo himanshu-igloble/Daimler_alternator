@@ -70,20 +70,39 @@ def main() -> None:
         g = ged_first_fire(panel)
         e = exceedance_first_fire(panel, p95, k, cfg.EXCEED_TRAIL_DAYS)
         c = compound_first_fire(panel, nfb)
+        # CURRENT-STATE channels (decision-engine inputs): evaluated at the
+        # truck's latest trusted day only — one evaluation, no whole-life
+        # multiple-comparison inflation. Ever-fired columns above are honest
+        # negative-result reporting, NOT deployable standing alarms.
+        d_tr = C.trusted(panel)
+        t_now = float(d_tr["day"].max()) if len(d_tr) else float("nan")
+        comp_now = int(C.x2_compound(panel, t_now, nfb)) if len(d_tr) else 0
+        recent = d_tr[(d_tr["day"] > t_now - cfg.EXCEED_TRAIL_DAYS) & (d_tr["day"] <= t_now)]
+        exceed_now = int((pd.to_numeric(recent["crank_recovery_t"], errors="coerce")
+                          > p95).sum() >= cfg.EXCEED_K_START) if len(d_tr) else 0
         rows.append({"vin_label": v, "failed_flag": int(r["failed_flag"]),
                      "ged_fired": g is not None, "ged_lead_days": _lead(panel, g),
                      "exceed_fired": e is not None, "exceed_lead_days": _lead(panel, e),
                      "exceed_k": k,
                      "compound_fired": c is not None, "compound_lead_days": _lead(panel, c),
-                     "any_fired": any(x is not None for x in (g, e, c))})
+                     "any_fired": any(x is not None for x in (g, e, c)),
+                     "compound_current": comp_now, "exceed_current": exceed_now,
+                     # early-watch = compound only: the exceedance channel failed
+                     # every honest test (no viable k ever-fired; 1/15 NF current)
+                     # and is reported but NOT decision-feeding.
+                     "early_watch_current": comp_now})
     out = pd.DataFrame(rows)
     out.to_csv(cfg.EMERG_CACHE / "emergency_per_vin.csv", index=False)
     f = out[out.failed_flag == 1]; nf = out[out.failed_flag == 0]
-    print(f"\n[emergency] failed recall: ged {int(f.ged_fired.sum())}/10, "
-          f"exceed {int(f.exceed_fired.sum())}/10, compound {int(f.compound_fired.sum())}/10, "
-          f"any {int(f.any_fired.sum())}/10")
-    print(f"[emergency] NF false fires: ged {int(nf.ged_fired.sum())}, "
-          f"exceed {int(nf.exceed_fired.sum())}, compound {int(nf.compound_fired.sum())} (target 0)")
+    print(f"\n[emergency] EVER-FIRED (whole-life, reporting only) failed recall: "
+          f"ged {int(f.ged_fired.sum())}/10, exceed {int(f.exceed_fired.sum())}/10, "
+          f"compound {int(f.compound_fired.sum())}/10")
+    print(f"[emergency] EVER-FIRED NF false fires: ged {int(nf.ged_fired.sum())}, "
+          f"exceed {int(nf.exceed_fired.sum())}, compound {int(nf.compound_fired.sum())} "
+          f"(channels 2-3 NOT deployable as standing alarms)")
+    print(f"[emergency] CURRENT-STATE (decision inputs): failed early-watch "
+          f"{int(f.early_watch_current.sum())}/10; NF false {int(nf.early_watch_current.sum())}/15 "
+          f"(gate target 0)")
     print(out.to_string(index=False))
 
 if __name__ == "__main__":
