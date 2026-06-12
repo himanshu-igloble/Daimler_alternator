@@ -97,7 +97,7 @@ def vsi_rpm_curve(eo: pd.DataFrame, cfg) -> pd.DataFrame:
 
 
 def _bin3(d: pd.DataFrame, cfg) -> pd.DataFrame:
-    d = d.dropna(subset=["vsi", "anr"]).copy()
+    d = d.dropna(subset=["vsi", "anr", "RPM", "CSP"]).copy()
     d["rpm_bin"] = np.floor(d["RPM"] / cfg.REF_RPM_BIN).astype("int64")
     d["anr_bin"] = np.floor(d["anr"] / cfg.REF_ANR_BIN).astype("int64")
     d["csp_bin"] = np.floor(d["CSP"] / cfg.REF_CSP_BIN).astype("int64")
