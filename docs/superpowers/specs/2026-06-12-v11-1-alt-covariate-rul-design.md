@@ -123,6 +123,18 @@ channel active; emergency = GED=2 storm.
   all from V11.1's own caches (legitimate again, since V11.1 owns posterior samples).
 - `results/V11.1_ALT_verification.json` + a V11.1-vs-V10.6.2-vs-V11 comparison table.
 
+## 8b. Mid-build amendments (evidence-driven, 2026-06-12)
+
+1. **Backtest verdict (real data): NO_IMPROVEMENT.** M0 MAE 140.4 < M1 148.8 <
+   M2 162.2; dummy 49.7; M0 ships. x1 confirmed exposure-confounded.
+2. **Emergency redesign:** ever-fired whole-life evaluation invalidates channels
+   2–3 (exceedance: no k gives 0/15 NF with recall > 0; compound: 6/15 NF from
+   ~500 evaluations/truck). The decision-feeding signal is **CURRENT-STATE
+   compound only** (x2 at latest trusted day): 3/10 failed, 0/15 NF. Exceedance
+   is report-only everywhere (negative result). G-EMERG redefined: GED ever-fired
+   2/10 & 0/15 preserved; current-state early-watch 0/15 NF and ≥3/10 failed;
+   ever-fired ch2/3 rates reported, not gated.
+
 ## 9. Out of scope
 
 - No classifier re-training or re-scoring (frozen surface).
