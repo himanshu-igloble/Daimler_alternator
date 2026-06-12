@@ -33,7 +33,7 @@ def x2_compound(panel: pd.DataFrame, t: float, nfb: pd.DataFrame) -> int:
         if ch in cfg.VOTE_BAD_HIGH:
             votes += int(v > nfb.loc[ch, "nf_p95"])
         else:
-            votes += int(v > nfb.loc[ch, "nf_p95"])
+            votes += int(v < nfb.loc[ch, "nf_p05"])
     return int(votes >= cfg.VOTE_MIN)
 
 def load_panel(vin: str) -> pd.DataFrame:

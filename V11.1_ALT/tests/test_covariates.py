@@ -24,11 +24,21 @@ def test_x1_counts_only_up_to_t():
 
 def test_x2_trailing_window_votes():
     d = _panel()
+    # ged_churn (BAD_HIGH) 100 > p95=50 -> 1 vote; BAD_LOW channels 100 < p05=200 -> 3 votes
     nfb = pd.DataFrame({"feature": cfg.VOTE_CHANNELS,
-                        "nf_p05": [0.0]*5, "nf_p95": [50.0]*5}).set_index("feature")
+                        "nf_p05": [200.0]*5, "nf_p95": [50.0]*5}).set_index("feature")
     assert C.x2_compound(d, t=100, nfb=nfb) == 1
-    nfb2 = nfb.copy(); nfb2["nf_p95"] = 1e6
+    # kill both directions -> no votes
+    nfb2 = pd.DataFrame({"feature": cfg.VOTE_CHANNELS,
+                         "nf_p05": [-1e6]*5, "nf_p95": [1e6]*5}).set_index("feature")
     assert C.x2_compound(d, t=100, nfb=nfb2) == 0
+
+def test_x2_bad_low_uses_p05_not_p95():
+    # regression: BAD_LOW channels must vote on v < p05, never on v > p95
+    d = _panel()
+    nfb = pd.DataFrame({"feature": cfg.VOTE_CHANNELS,
+                        "nf_p05": [200.0]*5, "nf_p95": [1e6]*5}).set_index("feature")
+    assert C.x2_compound(d, t=100, nfb=nfb) == 1   # 3 BAD_LOW votes alone
 
 def test_x2_ignores_data_after_t():
     d = _panel()
