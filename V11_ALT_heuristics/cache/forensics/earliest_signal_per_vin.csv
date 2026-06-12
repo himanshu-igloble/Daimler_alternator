@@ -1,0 +1,11 @@
+vin_label,earliest_discriminative_horizon_days,feature,z,ged2_total,n_days_final_30d,verdict
+VIN6_F_ALT,60,vsi_sag_frac,10.33,0,31,discriminative_precursor
+VIN1_F_ALT,60,crank_recovery_t,2.54,82357,17,discriminative_precursor
+VIN4_F_ALT,none,,,0,28,no_discriminative_precursor
+VIN9_F_ALT,30,crank_recovery_t,155.37,0,24,discriminative_precursor
+VIN10_F_ALT,7,vsi_sag_frac,222.88,2897,24,discriminative_precursor
+VIN3_F_ALT,none,,,0,0,no_discriminative_precursor
+VIN7_F_ALT,none,,,0,29,no_discriminative_precursor
+VIN8_F_ALT,7,crank_recovery_t,1288.03,0,3,discriminative_precursor
+VIN5_F_ALT,none,,,0,30,no_discriminative_precursor
+VIN2_F_ALT,14,crank_vsi_min,-3.13,0,25,discriminative_precursor
