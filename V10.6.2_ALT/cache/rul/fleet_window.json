@@ -1,0 +1,13 @@
+{
+  "anchor": "empirical_failed_ttf",
+  "n_events": 10,
+  "median_ttf_days": 601.0,
+  "p25_ttf_days": 577.5,
+  "p75_ttf_days": 652.5,
+  "min_ttf_days": 472.0,
+  "max_ttf_days": 673.0,
+  "median_ttf_km_est": 120440.0,
+  "median_ttf_ehrs_est": 4538.0,
+  "survival_median_context_days": 718.5,
+  "note": "Headline window uses the empirical failed-truck median (backtest-validated best point estimate). The survival-model median (718.5d) over-predicts by ~118d due to right-censoring and is shown for context only."
+}

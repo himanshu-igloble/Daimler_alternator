@@ -1,0 +1,11 @@
+vin,ttf_days,cov_30d,ged2_total,signature_class,failure_class,likely_mode_hypothesis,lead_days,actionability,ged_emergency_verified,key_evidence
+VIN4_F_ALT,664,28,0,NONE_ABRUPT,abrupt/no-precursor,Abrupt — bearing / winding open / shorted regulator / load-dump,0,none,False,flat — no robust deviation
+VIN9_F_ALT,606,24,0,NONE_ABRUPT,abrupt/no-precursor,Abrupt — bearing / winding open / shorted regulator / load-dump,0,none,False,flat — no robust deviation
+VIN5_F_ALT,661,30,0,NONE_ABRUPT,abrupt/no-precursor,Abrupt — bearing / winding open / shorted regulator / load-dump,0,none,False,flat — no robust deviation
+VIN7_F_ALT,673,29,0,NONE_ABRUPT,abrupt/no-precursor,Abrupt — bearing / winding open / shorted regulator / load-dump,0,none,False,flat — no robust deviation
+VIN6_F_ALT,552,31,0,NONE_ABRUPT,abrupt/no-precursor,Abrupt — bearing / winding open / shorted regulator / load-dump,0,none,False,flat — no robust deviation
+VIN1_F_ALT,596,17,82357,EXCITATION_STORM,gradual-electrical,Excitation/field-control disturbance (regulator IC / brush-slip-ring / field circuit — not separable),21,actionable,True,storm:ged2_cnt~3833/d @T-30d
+VIN10_F_ALT,472,24,2897,EXCITATION_STORM,gradual-electrical,Excitation/field-control disturbance (regulator IC / brush-slip-ring / field circuit — not separable),1,terminal-only,True,storm:ged2_cnt~414/d @T-7d; ripple:vsi_sag_frac z=223 @T-7d; droop:vsi_p05 z=-11.9 @T-7d
+VIN2_F_ALT,627,25,0,VOLTAGE_TRANSIENT,inconclusive,"Transient voltage instability, recovers before failure — inconclusive",0,none,False,ripple:vsi_sag_frac z=235 @T-7d; droop:vsi_p05 z=-27.5 @T-7d
+VIN3_F_ALT,591,0,0,UNOBSERVABLE,inconclusive,Telemetry gap near failure — unclassifiable,0,none,False,flat — no robust deviation
+VIN8_F_ALT,573,3,0,UNDER_OBSERVED,inconclusive,Too few trusted days near failure (3d) — inconclusive,0,none,False,flat — no robust deviation

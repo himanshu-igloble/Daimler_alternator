@@ -1,0 +1,241 @@
+================================================================================
+ALTERNATOR — CANDIDATE HEURISTICS TO REDUCE LEAD TIME TO FAILURE
+Reference iteration: V10.6.2_ALT (honest-baseline RUL)
+Author context: built on the 6 raw CAN channels only (CSP, RPM, ANR, GED, VSI, SMA)
+Date: 2026-06-12
+================================================================================
+
+--------------------------------------------------------------------------------
+0. WHY THIS DOCUMENT EXISTS  (the problem V10.6.2 left open)
+--------------------------------------------------------------------------------
+V10.6.2 proved three uncomfortable facts:
+
+  (a) The frozen V10.5.3 classifier tells you WHICH truck (AUROC 0.927), but it
+      is a static whole-life score — it gives NO timing / lead-time channel.
+  (b) The per-truck survival RUL does NOT beat a fleet-clock dummy on day
+      accuracy (rewound MAE 142d vs 50d). It only produces a wide band.
+  (c) The ONLY genuine short-horizon precursor found in all 6 channels is the
+      GED=2 excitation-fault storm — and it fires for just 2/10 failures
+      (VIN1 ~21d lead, VIN10 ~1d lead), 0/15 false alarms.
+
+So the open question is: can we extract EARLIER, HIGHER-RECALL precursors from
+the SAME six raw channels? V10.6.2 mostly mined VSI level/spread + GED=2 counts.
+The candidates below target the signal combinations V10.6.2 did NOT exploit —
+chiefly LOAD-NORMALISED and REGIME-CONDITIONED voltage behaviour, crank/recovery
+dynamics, and compound multi-channel alarms.
+
+Honest constraint to keep in mind throughout: n = 10 failure events. Any new
+heuristic must be validated as DISCRIMINATIVE (within-truck change AND outside
+the healthy-fleet NF p05-p95 envelope), exactly as the V10.6.2 forensic engine
+does, or it is just curve-fitting to 10 trucks.
+
+--------------------------------------------------------------------------------
+1. ALTERNATOR OUTPUT CURVE  —  dVSI/dRPM regression slope  [HIGHEST PRIORITY]
+--------------------------------------------------------------------------------
+Raw signals : VSI, RPM  (engine-on, valid both)
+Idea        : A healthy alternator raises supply voltage with engine speed up to
+              its regulation ceiling (~28 V). Regress VSI on RPM per day/week
+              (or fit VSI vs RPM-bucketed means). Track:
+                - slope dVSI/dRPM in the 600-1500 rpm band (charging ramp)
+                - regulation ceiling = plateau VSI at RPM > 1500
+                - rpm-at-which-VSI-first-reaches-27V (charging onset speed)
+Failure logic: Diode/stator/regulator degradation flattens the ramp and lowers
+              the ceiling BEFORE the mean voltage visibly sags — the mean is
+              propped up by cruise RPM, which is why V10.6.2's vsi_mean was flat
+              for 8/10. Conditioning on RPM removes that masking.
+Lead-time win: This is the most physically-motivated untried signal; expected to
+              surface gradual electrical-degradation modes weeks earlier than a
+              raw-mean drop.
+Validate    : per-truck slope trend vs own mid-life baseline; discriminative if
+              ceiling or slope drops below NF p05.
+
+--------------------------------------------------------------------------------
+2. LOAD-NORMALISED VOLTAGE RESIDUAL  —  expected-VSI model  [HIGH PRIORITY]
+--------------------------------------------------------------------------------
+Raw signals : VSI ~ f(RPM, ANR, CSP)
+Idea        : Build a healthy-fleet reference surface E[VSI | RPM, ANR, CSP]
+              (simple binned lookup or robust linear model on NF trucks). For
+              each failing truck compute the daily residual = observed VSI -
+              expected VSI at its actual operating point. Track residual mean /
+              negative-residual fraction over time.
+Failure logic: Removes the confound that V10.6.2 flagged — voltage looks normal
+              only because the truck happened to be cruising. A truck whose
+              voltage is 0.8 V LOW *for its load* is degrading even if its raw
+              daily mean sits inside the fleet band.
+Lead-time win: Turns the flat-VSI population (8/10) into a ranked residual-drift
+              signal; the single most likely route to >2/10 recall.
+Validate    : residual-drift slope, change-point on residual series.
+
+--------------------------------------------------------------------------------
+3. POST-CRANK VOLTAGE RECOVERY DYNAMICS  [HIGH PRIORITY]
+--------------------------------------------------------------------------------
+Raw signals : VSI, SMA (SMA 1->0 edge), RPM
+Idea        : V10.6.2 used crank_vsi_min (the sag floor) but threw away the
+              RECOVERY. For each start event (SMA falling edge) measure:
+                - samples/seconds for VSI to climb back to >=27 V
+                - recovery slope (V per sample) in the first ~30 s after crank
+                - overshoot / settle behaviour
+Failure logic: A weakening alternator or its battery interface recovers slowly
+              after the crank load is removed; slow recovery is an early,
+              load-stressed test the truck performs every single start.
+Lead-time win: Every key-on is a free stress test — high event count even on
+              trucks that idle little. Good for trucks with few GED events.
+Validate    : per-truck recovery-time trend; discriminative vs NF recovery dist.
+
+--------------------------------------------------------------------------------
+4. REGULATION DUTY CYCLE  —  fraction of engine-on time in the regulation band
+--------------------------------------------------------------------------------
+Raw signals : VSI, RPM (engine-on)
+Idea        : Define in-regulation = 27.0 <= VSI <= 29.0 V while engine-on.
+              Daily metric = fraction of engine-on samples in band. Complements
+              V10.6.2's vsi_sag_frac (which only counts < 24 V) by also catching
+              over-charge and "never reaches regulation" behaviour.
+Failure logic: Regulator faults push voltage out of the band in EITHER direction;
+              a one-sided <24 V threshold misses over-voltage/hunting failures.
+Lead-time win: Broader fault-mode coverage than the existing sag-only metric.
+Validate    : duty-cycle trend; discriminative if band-fraction < NF p05.
+
+--------------------------------------------------------------------------------
+5. CUMULATIVE UNDER-VOLTAGE DOSE  (stress accumulator, not daily fraction)
+--------------------------------------------------------------------------------
+Raw signals : VSI, RPM, timestamp
+Idea        : Integrate (24 - VSI) over time while engine-on and VSI < 24 V — an
+              accumulating "under-voltage dose" (volt-seconds). V10.6.2 used a
+              per-day FRACTION, which resets daily and hides slow accumulation.
+Failure logic: Battery sulfation / progressive charge starvation is cumulative;
+              a monotone dose curve with a rising knee is an earlier, smoother
+              precursor than a noisy daily fraction.
+Lead-time win: Smooth monotone signal -> earlier, more reliable change-point.
+Validate    : knee/elbow detection on the cumulative curve.
+
+--------------------------------------------------------------------------------
+6. RESTING-VOLTAGE DECAY SLOPE  (battery state-of-charge proxy)  [interplay]
+--------------------------------------------------------------------------------
+Raw signals : VSI, RPM==0 (engine-off rows)
+Idea        : V10.6.2 computed resting_vsi_mean per day but never TRENDED it.
+              Fit a slope of engine-off resting voltage across the truck's life,
+              and the overnight decay (last reading before key-off vs first
+              reading at next key-on).
+Failure logic: A failing alternator under-charges; the battery's resting voltage
+              and overnight hold both drift down weeks before a hard failure.
+              This is the battery<->alternator interplay the dataset can see.
+Lead-time win: Slow-moving, low-noise channel; potentially the earliest of all.
+Validate    : resting-slope vs NF; discriminative if slope below NF p05.
+
+--------------------------------------------------------------------------------
+7. CRANK-EFFORT TREND  —  starts/engine-hour and crank duration  [interplay]
+--------------------------------------------------------------------------------
+Raw signals : SMA (rising edges = sma_starts), RPM, timestamp
+Idea        : V10.6.2 computed sma_starts but used it only as duty context.
+              Trend (a) cranks per engine-hour and (b) crank duration (run-length
+              of SMA==1) over the truck's life.
+Failure logic: Rising crank count / longer cranks indicate hard starting — a
+              charging/battery problem upstream of an alternator failure (and a
+              direct precursor for the SM dataset). V10.6.2 noted crank-duration
+              artifacts in SM; here use it as a slow trend, not a point flag.
+Lead-time win: Behavioural precursor independent of voltage; adds an orthogonal
+              vote to a compound alarm.
+Validate    : duration/count trend vs NF envelope.
+
+--------------------------------------------------------------------------------
+8. FULL GED STATE-TRANSITION MONITORING  (not just GED==2)
+--------------------------------------------------------------------------------
+Raw signals : GED (states 0/1/2/3)
+Idea        : V10.6.2's emergency layer counts only GED==2 ("disturbance").
+              Also trend GED==1 ("excitation not allowed") and GED==3 ("signal
+              unavailable") daily rates, and GED state-transition frequency
+              (0->2, 0->3 churn).
+Failure logic: A rising rate of "not allowed"/"unavailable" can precede the full
+              GED=2 storm; transition churn is an instability signature even when
+              the absolute GED=2 count stays under the 200/day fire threshold.
+Lead-time win: Could extend the GED channel's recall beyond the current 2/10 and
+              push VIN1's 21-day lead earlier.
+Validate    : per-state daily-rate trend; discriminative vs NF.
+
+--------------------------------------------------------------------------------
+9. IDLE-VOLTAGE INSTABILITY / REGULATOR HUNTING  (within-regime variance trend)
+--------------------------------------------------------------------------------
+Raw signals : VSI, RPM (idle band 550-950 rpm), CSP<5
+Idea        : V10.6.2 used idle_vsi_mean (level). Instead trend the within-idle
+              VARIANCE, lag-1 autocorrelation, and zero-crossing rate of VSI at
+              idle (regulator hunting / ripple signature). Optionally a cheap
+              FFT/PSD peak on the idle VSI series.
+Failure logic: Diode-ripple and regulator hunting raise high-frequency voltage
+              variance at a FIXED operating point long before the mean moves —
+              and idle is the cleanest fixed point in the data.
+Lead-time win: Targets the abrupt/electrical modes V10.6.2 found undetectable
+              via level features.
+Validate    : idle-variance / autocorr trend vs NF envelope.
+
+--------------------------------------------------------------------------------
+10. LOAD-INDUCED SAG SEPARATION  (idle-sag vs high-load-sag)  [fault typing]
+--------------------------------------------------------------------------------
+Raw signals : VSI, ANR (torque), RPM
+Idea        : Split under-voltage events by load: sag while ANR is HIGH (load-
+              induced droop) vs sag at idle / low ANR (regulation fault). Track
+              the two fractions separately.
+Failure logic: High-load sag implicates alternator current capacity (stator/
+              diode); idle sag implicates the regulator. Separating them both
+              improves recall AND points at the failure mode -> better repair
+              guidance, not just earlier warning.
+Lead-time win: Recovers signal that V10.6.2's single sag_frac averaged away.
+Validate    : per-mode sag-fraction trend vs NF.
+
+--------------------------------------------------------------------------------
+11. COMPOUND / VOTING EARLY ALARM  (combine the orthogonal channels)
+--------------------------------------------------------------------------------
+Raw signals : all of the above
+Idea        : Instead of one threshold, build a per-truck WEAK-VOTE alarm: fire
+              "early-watch" when >=2 of {dVSI/dRPM ceiling drop, load-residual
+              drift, slow post-crank recovery, resting-voltage decay, GED churn}
+              cross their NF p05/p95 boundary in the same window.
+Failure logic: V10.6.2 showed no SINGLE channel generalises past 2/10. A 2-of-N
+              vote across ORTHOGONAL physics trades a little precision for recall
+              and earlier first-trigger, while the existing GED=2 storm stays as
+              the separate high-precision "days-left" emergency.
+Lead-time win: The realistic path to detecting more than 2/10 with a usable lead.
+Validate    : LOVO over the 10 failed VINs; report recall, false-alarm rate on
+              the 15 NF, and first-trigger lead distribution — same honest gate
+              as V10.6.2 (must beat fleet-clock on first-trigger lead, 0 NF fires
+              is the precision target).
+
+--------------------------------------------------------------------------------
+12. PER-TRUCK CHANGE-POINT DETECTION  (earliest-deviation timestamp)
+--------------------------------------------------------------------------------
+Raw signals : any engineered series above (best on load-residual, resting-V)
+Idea        : Run online CUSUM or Bayesian change-point on each truck's OWN
+              normalised feature series; the change-point timestamp IS the lead
+              time. Removes dependence on a fleet threshold entirely.
+Failure logic: Each truck is its own control; the question "when did THIS truck
+              depart from ITS baseline" is exactly the lead-time question, and
+              avoids the fleet-envelope dilution that hides slow individual drift.
+Lead-time win: Directly maximises lead time by definition; pairs naturally with
+              #2 and #6.
+Validate    : change-point lead vs JCOPENDATE; require detection before T-7d on
+              more than the current 2/10 to count as progress.
+
+================================================================================
+PRIORITISATION (given the V10.6.2 evidence)
+================================================================================
+  Tier 1 (most likely to add lead time):  #1 dVSI/dRPM,  #2 load-residual,
+                                           #3 post-crank recovery,  #11 voting
+  Tier 2 (slow, low-noise early channels): #5 UV dose,  #6 resting decay,
+                                           #12 change-point
+  Tier 3 (fault-mode coverage / typing):   #4 duty cycle, #8 GED states,
+                                           #9 idle hunting, #10 sag typing,
+                                           #7 crank effort
+
+WHAT NOT TO EXPECT
+  - None of these will turn the per-truck survival RUL into a precise date; the
+    fleet-clock limit (V10.6.2 sec 5) is structural at n=10.
+  - The honest deliverable shape stays: WHICH (classifier) + WHEN-fleet (Weibull
+    window) + WHEN-emergency (precursor alarm). These candidates aim to make the
+    third box fire EARLIER and for MORE trucks, not to manufacture daily RUL.
+
+VALIDATION HARNESS TO REUSE
+  V10.6.2_ALT/src/V10.6.2_ALT_forensic_features.py already implements the exact
+  honest test (within-truck z>=2 AND outside NF p05-p95, MIN_EO_SAMPLES=200 trust
+  filter, 90/60/45/30/14/7d horizon bins). Add each new feature to its feat_cols
+  / daily panel and read earliest_signal_per_vin.csv to see if recall rises above
+  the current 2/10 baseline.
+================================================================================
