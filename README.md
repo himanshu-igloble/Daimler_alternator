@@ -24,11 +24,12 @@ The project answers three operational questions from on-board CAN-bus telemetry:
 ## 1. Repository & branch map
 
 This repo keeps **each version on its own branch** so you can return to any version at any time, and
-`main` carries **all three** curated versions merged together.
+`main` carries **everything** — all three curated versions **plus** the full dev tree (`STARTER MOTOR/`
++ `docs/`) merged together.
 
 | Branch | What's on it | Use it to… |
 |---|---|---|
-| **`main`** | All three curated versions (`V10.6.2_ALT/` + `V11_ALT_heuristics/` + `V11.1_ALT/`) + this README + requirements + comparisons | Browse everything in one place |
+| **`main`** | **Everything:** the three curated versions (`V10.6.2_ALT/` + `V11_ALT_heuristics/` + `V11.1_ALT/`) + the full dev tree (`STARTER MOTOR/` + `docs/`) + this README, requirements, and comparisons | Browse everything in one place |
 | **`v10.6.2-alt`** | **Only** the V10.6.2 deliverable (honest baseline) | Check out / roll back to V10.6.2 in isolation |
 | **`v11-alt`** | **Only** the V11 deliverable (lead-time heuristics) | Check out / roll back to V11 in isolation |
 | **`v11.1-alt-curated`** | **Only** the V11.1 deliverable (covariate RUL) | Check out / roll back to V11.1 in isolation |
@@ -40,7 +41,7 @@ cd Daimler_alternator
 git switch v10.6.2-alt        # see ONLY V10.6.2
 git switch v11-alt            # see ONLY V11
 git switch v11.1-alt-curated  # see ONLY V11.1 (curated)
-git switch main              # see ALL THREE
+git switch main              # see EVERYTHING (3 versions + STARTER MOTOR + docs)
 ```
 
 ---
