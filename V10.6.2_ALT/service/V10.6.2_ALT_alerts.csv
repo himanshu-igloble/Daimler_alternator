@@ -1,0 +1,5 @@
+vin_label,risk_tier,state,ged_storm_active,collapse_alert,data_gap_flag,recommended_action
+VIN3_NF_ALT,HIGH_RISK,NORMAL,False,False,False,PRIORITY: high failure risk + past/near fleet replacement age — add alternator inspection at next depot visit.
+VIN8_NF_ALT,LOW_RISK,NORMAL,False,False,True,BLIND: telemetry stale/sparse — cannot monitor; fall back to fleet-clock schedule & fix telematics (or confirm decommissioned).
+VIN9_NF_ALT,LOW_RISK,NORMAL,False,False,True,BLIND: telemetry stale/sparse — cannot monitor; fall back to fleet-clock schedule & fix telematics (or confirm decommissioned).
+VIN15_NF_ALT,LOW_RISK,NORMAL,False,False,True,BLIND: telemetry stale/sparse — cannot monitor; fall back to fleet-clock schedule & fix telematics (or confirm decommissioned).

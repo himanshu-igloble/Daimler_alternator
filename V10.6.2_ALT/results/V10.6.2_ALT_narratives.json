@@ -1,0 +1,172 @@
+{
+  "VIN3_NF_ALT": {
+    "headline": "VIN3_NF_ALT: HIGH_RISK (ridge 0.49, AMBER) | RUL band 23-281d (median 116d)",
+    "risk_tier": "HIGH_RISK",
+    "risk_confidence": "MEDIUM",
+    "timing_confidence": "LOW",
+    "rul_band_days": "23-281d (median 116d)",
+    "recommendation": "CRITICAL: high failure risk and near fleet-replacement age \u2014 schedule inspection now."
+  },
+  "VIN11_NF_ALT": {
+    "headline": "VIN11_NF_ALT: LOW_RISK (ridge 0.26, GREEN) | RUL band 16-232d (median 87d)",
+    "risk_tier": "LOW_RISK",
+    "risk_confidence": "HIGH",
+    "timing_confidence": "LOW",
+    "rul_band_days": "16-232d (median 87d)",
+    "recommendation": "Watch: near fleet-replacement age but low classifier risk \u2014 review at next depot visit."
+  },
+  "VIN10_NF_ALT": {
+    "headline": "VIN10_NF_ALT: LOW_RISK (ridge 0.44, AMBER) | RUL band 16-239d (median 88d)",
+    "risk_tier": "LOW_RISK",
+    "risk_confidence": "MEDIUM",
+    "timing_confidence": "LOW",
+    "rul_band_days": "16-239d (median 88d)",
+    "recommendation": "Watch: near fleet-replacement age but low classifier risk \u2014 review at next depot visit."
+  },
+  "VIN2_NF_ALT": {
+    "headline": "VIN2_NF_ALT: LOW_RISK (ridge 0.40, AMBER) | RUL band 16-237d (median 90d)",
+    "risk_tier": "LOW_RISK",
+    "risk_confidence": "MEDIUM",
+    "timing_confidence": "LOW",
+    "rul_band_days": "16-237d (median 90d)",
+    "recommendation": "Watch: near fleet-replacement age but low classifier risk \u2014 review at next depot visit."
+  },
+  "VIN1_NF_ALT": {
+    "headline": "VIN1_NF_ALT: LOW_RISK (ridge 0.26, GREEN) | RUL band 14-317d (median 97d)",
+    "risk_tier": "LOW_RISK",
+    "risk_confidence": "HIGH",
+    "timing_confidence": "LOW",
+    "rul_band_days": "14-317d (median 97d)",
+    "recommendation": "Watch: near fleet-replacement age but low classifier risk \u2014 review at next depot visit."
+  },
+  "VIN6_NF_ALT": {
+    "headline": "VIN6_NF_ALT: LOW_RISK (ridge 0.41, AMBER) | RUL band 19-257d (median 102d)",
+    "risk_tier": "LOW_RISK",
+    "risk_confidence": "MEDIUM",
+    "timing_confidence": "LOW",
+    "rul_band_days": "19-257d (median 102d)",
+    "recommendation": "Watch: near fleet-replacement age but low classifier risk \u2014 review at next depot visit."
+  },
+  "VIN5_NF_ALT": {
+    "headline": "VIN5_NF_ALT: LOW_RISK (ridge 0.33, GREEN) | RUL band 20-265d (median 106d)",
+    "risk_tier": "LOW_RISK",
+    "risk_confidence": "MEDIUM",
+    "timing_confidence": "LOW",
+    "rul_band_days": "20-265d (median 106d)",
+    "recommendation": "Watch: near fleet-replacement age but low classifier risk \u2014 review at next depot visit."
+  },
+  "VIN7_NF_ALT": {
+    "headline": "VIN7_NF_ALT: LOW_RISK (ridge 0.41, AMBER) | RUL band 20-262d (median 106d)",
+    "risk_tier": "LOW_RISK",
+    "risk_confidence": "MEDIUM",
+    "timing_confidence": "LOW",
+    "rul_band_days": "20-262d (median 106d)",
+    "recommendation": "Watch: near fleet-replacement age but low classifier risk \u2014 review at next depot visit."
+  },
+  "VIN13_NF_ALT": {
+    "headline": "VIN13_NF_ALT: LOW_RISK (ridge 0.21, GREEN) | RUL band 24-283d (median 118d)",
+    "risk_tier": "LOW_RISK",
+    "risk_confidence": "HIGH",
+    "timing_confidence": "LOW",
+    "rul_band_days": "24-283d (median 118d)",
+    "recommendation": "Watch: near fleet-replacement age but low classifier risk \u2014 review at next depot visit."
+  },
+  "VIN4_NF_ALT": {
+    "headline": "VIN4_NF_ALT: LOW_RISK (ridge 0.43, AMBER) | RUL band 24-288d (median 124d)",
+    "risk_tier": "LOW_RISK",
+    "risk_confidence": "MEDIUM",
+    "timing_confidence": "LOW",
+    "rul_band_days": "24-288d (median 124d)",
+    "recommendation": "Watch: near fleet-replacement age but low classifier risk \u2014 review at next depot visit."
+  },
+  "VIN14_NF_ALT": {
+    "headline": "VIN14_NF_ALT: LOW_RISK (ridge 0.32, GREEN) | RUL band 28-309d (median 138d)",
+    "risk_tier": "LOW_RISK",
+    "risk_confidence": "MEDIUM",
+    "timing_confidence": "LOW",
+    "rul_band_days": "28-309d (median 138d)",
+    "recommendation": "Watch: near fleet-replacement age but low classifier risk \u2014 review at next depot visit."
+  },
+  "VIN15_NF_ALT": {
+    "headline": "VIN15_NF_ALT: LOW_RISK (ridge 0.40, AMBER) | RUL band 33-326d (median 151d)",
+    "risk_tier": "LOW_RISK",
+    "risk_confidence": "MEDIUM",
+    "timing_confidence": "LOW",
+    "rul_band_days": "33-326d (median 151d)",
+    "recommendation": "Watch: near fleet-replacement age but low classifier risk \u2014 review at next depot visit."
+  },
+  "VIN12_NF_ALT": {
+    "headline": "VIN12_NF_ALT: LOW_RISK (ridge 0.04, GREEN) | RUL band 44-371d (median 183d)",
+    "risk_tier": "LOW_RISK",
+    "risk_confidence": "HIGH",
+    "timing_confidence": "LOW",
+    "rul_band_days": "44-371d (median 183d)",
+    "recommendation": "Watch: near fleet-replacement age but low classifier risk \u2014 review at next depot visit."
+  },
+  "VIN9_NF_ALT": {
+    "headline": "VIN9_NF_ALT: LOW_RISK (ridge 0.11, GREEN) | RUL band 47-377d (median 190d)",
+    "risk_tier": "LOW_RISK",
+    "risk_confidence": "HIGH",
+    "timing_confidence": "LOW",
+    "rul_band_days": "47-377d (median 190d)",
+    "recommendation": "Watch: near fleet-replacement age but low classifier risk \u2014 review at next depot visit."
+  },
+  "VIN8_NF_ALT": {
+    "headline": "VIN8_NF_ALT: LOW_RISK (ridge 0.39, AMBER) | RUL band 68-428d (median 234d)",
+    "risk_tier": "LOW_RISK",
+    "risk_confidence": "MEDIUM",
+    "timing_confidence": "LOW",
+    "rul_band_days": "68-428d (median 234d)",
+    "recommendation": "Watch: near fleet-replacement age but low classifier risk \u2014 review at next depot visit."
+  },
+  "VIN1_F_ALT": {
+    "headline": "VIN1_F_ALT: FAILED (in dataset) | GED=2 would have flagged it 21.0d early",
+    "risk_tier": "N/A (failed)",
+    "recommendation": "Post-hoc: alternator already failed (in dataset)."
+  },
+  "VIN10_F_ALT": {
+    "headline": "VIN10_F_ALT: FAILED (in dataset) | GED=2 would have flagged it 1.0d early",
+    "risk_tier": "N/A (failed)",
+    "recommendation": "Post-hoc: alternator already failed (in dataset)."
+  },
+  "VIN2_F_ALT": {
+    "headline": "VIN2_F_ALT: FAILED (in dataset) | no GED=2 precursor",
+    "risk_tier": "N/A (failed)",
+    "recommendation": "Post-hoc: alternator already failed (in dataset)."
+  },
+  "VIN3_F_ALT": {
+    "headline": "VIN3_F_ALT: FAILED (in dataset) | no GED=2 precursor",
+    "risk_tier": "N/A (failed)",
+    "recommendation": "Post-hoc: alternator already failed (in dataset)."
+  },
+  "VIN4_F_ALT": {
+    "headline": "VIN4_F_ALT: FAILED (in dataset) | no GED=2 precursor",
+    "risk_tier": "N/A (failed)",
+    "recommendation": "Post-hoc: alternator already failed (in dataset)."
+  },
+  "VIN5_F_ALT": {
+    "headline": "VIN5_F_ALT: FAILED (in dataset) | no GED=2 precursor",
+    "risk_tier": "N/A (failed)",
+    "recommendation": "Post-hoc: alternator already failed (in dataset)."
+  },
+  "VIN6_F_ALT": {
+    "headline": "VIN6_F_ALT: FAILED (in dataset) | no GED=2 precursor",
+    "risk_tier": "N/A (failed)",
+    "recommendation": "Post-hoc: alternator already failed (in dataset)."
+  },
+  "VIN7_F_ALT": {
+    "headline": "VIN7_F_ALT: FAILED (in dataset) | no GED=2 precursor",
+    "risk_tier": "N/A (failed)",
+    "recommendation": "Post-hoc: alternator already failed (in dataset)."
+  },
+  "VIN8_F_ALT": {
+    "headline": "VIN8_F_ALT: FAILED (in dataset) | no GED=2 precursor",
+    "risk_tier": "N/A (failed)",
+    "recommendation": "Post-hoc: alternator already failed (in dataset)."
+  },
+  "VIN9_F_ALT": {
+    "headline": "VIN9_F_ALT: FAILED (in dataset) | no GED=2 precursor",
+    "risk_tier": "N/A (failed)",
+    "recommendation": "Post-hoc: alternator already failed (in dataset)."
+  }
+}

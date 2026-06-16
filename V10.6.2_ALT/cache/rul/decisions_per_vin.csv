@@ -1,0 +1,26 @@
+vin_label,failed_flag,ridge_prob,ridge_band,risk_tier,rul_p10_days,timing_flag,ged_emergency,risk_confidence,timing_confidence,recommendation
+VIN1_F_ALT,1,0.6058,RED,N/A,0.0,N/A,True,N/A,N/A,Post-hoc: alternator already failed (in dataset).
+VIN2_F_ALT,1,0.6085,RED,N/A,0.0,N/A,False,N/A,N/A,Post-hoc: alternator already failed (in dataset).
+VIN3_F_ALT,1,0.7603,RED,N/A,0.0,N/A,False,N/A,N/A,Post-hoc: alternator already failed (in dataset).
+VIN4_F_ALT,1,0.4456,AMBER,N/A,0.0,N/A,False,N/A,N/A,Post-hoc: alternator already failed (in dataset).
+VIN5_F_ALT,1,0.2799,GREEN,N/A,0.0,N/A,False,N/A,N/A,Post-hoc: alternator already failed (in dataset).
+VIN6_F_ALT,1,0.7112,RED,N/A,0.0,N/A,False,N/A,N/A,Post-hoc: alternator already failed (in dataset).
+VIN7_F_ALT,1,0.7178,RED,N/A,0.0,N/A,False,N/A,N/A,Post-hoc: alternator already failed (in dataset).
+VIN8_F_ALT,1,0.8923,RED,N/A,0.0,N/A,False,N/A,N/A,Post-hoc: alternator already failed (in dataset).
+VIN9_F_ALT,1,0.4919,AMBER,N/A,0.0,N/A,False,N/A,N/A,Post-hoc: alternator already failed (in dataset).
+VIN10_F_ALT,1,0.6263,RED,N/A,0.0,N/A,True,N/A,N/A,Post-hoc: alternator already failed (in dataset).
+VIN1_NF_ALT,0,0.2553,GREEN,LOW_RISK,13.9,NEAR_TERM,False,HIGH,LOW,Watch: near fleet-replacement age but low classifier risk — review at next depot visit.
+VIN2_NF_ALT,0,0.3956,AMBER,LOW_RISK,16.4,NEAR_TERM,False,MEDIUM,LOW,Watch: near fleet-replacement age but low classifier risk — review at next depot visit.
+VIN3_NF_ALT,0,0.4906,AMBER,HIGH_RISK,22.9,NEAR_TERM,False,MEDIUM,LOW,CRITICAL: high failure risk and near fleet-replacement age — schedule inspection now.
+VIN4_NF_ALT,0,0.4257,AMBER,LOW_RISK,23.9,NEAR_TERM,False,MEDIUM,LOW,Watch: near fleet-replacement age but low classifier risk — review at next depot visit.
+VIN5_NF_ALT,0,0.325,GREEN,LOW_RISK,19.8,NEAR_TERM,False,MEDIUM,LOW,Watch: near fleet-replacement age but low classifier risk — review at next depot visit.
+VIN6_NF_ALT,0,0.4133,AMBER,LOW_RISK,18.8,NEAR_TERM,False,MEDIUM,LOW,Watch: near fleet-replacement age but low classifier risk — review at next depot visit.
+VIN7_NF_ALT,0,0.4116,AMBER,LOW_RISK,20.2,NEAR_TERM,False,MEDIUM,LOW,Watch: near fleet-replacement age but low classifier risk — review at next depot visit.
+VIN8_NF_ALT,0,0.3934,AMBER,LOW_RISK,67.5,NEAR_TERM,False,MEDIUM,LOW,Watch: near fleet-replacement age but low classifier risk — review at next depot visit.
+VIN9_NF_ALT,0,0.1053,GREEN,LOW_RISK,47.3,NEAR_TERM,False,HIGH,LOW,Watch: near fleet-replacement age but low classifier risk — review at next depot visit.
+VIN10_NF_ALT,0,0.4389,AMBER,LOW_RISK,15.8,NEAR_TERM,False,MEDIUM,LOW,Watch: near fleet-replacement age but low classifier risk — review at next depot visit.
+VIN11_NF_ALT,0,0.2559,GREEN,LOW_RISK,15.9,NEAR_TERM,False,HIGH,LOW,Watch: near fleet-replacement age but low classifier risk — review at next depot visit.
+VIN12_NF_ALT,0,0.0421,GREEN,LOW_RISK,44.2,NEAR_TERM,False,HIGH,LOW,Watch: near fleet-replacement age but low classifier risk — review at next depot visit.
+VIN13_NF_ALT,0,0.2104,GREEN,LOW_RISK,23.8,NEAR_TERM,False,HIGH,LOW,Watch: near fleet-replacement age but low classifier risk — review at next depot visit.
+VIN14_NF_ALT,0,0.3162,GREEN,LOW_RISK,28.5,NEAR_TERM,False,MEDIUM,LOW,Watch: near fleet-replacement age but low classifier risk — review at next depot visit.
+VIN15_NF_ALT,0,0.3987,AMBER,LOW_RISK,32.9,NEAR_TERM,False,MEDIUM,LOW,Watch: near fleet-replacement age but low classifier risk — review at next depot visit.

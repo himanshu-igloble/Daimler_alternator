@@ -1,0 +1,133 @@
+==============================================================================
+ V10.6.2 ALTERNATOR — HOW TO READ THE CHARTS  (reading guide, 2026-06-05)
+==============================================================================
+Two chart types:
+  1. ENGINEER CHART  (per truck) : V10.6.2_ALT/visualizations/rul_curves/V10.6.2_ALT_<VIN>_rul.png
+  2. FLEET RUNWAY    (whole fleet): V10.6.2_ALT/visualizations/fleet_maintenance_board.png
+
+ONE-LINE FRAME (read this first):
+  The system tells you WHICH trucks are at risk (strong) and ROUGHLY WHEN the
+  fleet wears out (~601 days). It does NOT predict an exact per-truck failure
+  date — that is not possible from this data, and the charts are built to make
+  that limit visible, not to hide it.
+
+==============================================================================
+ FIGURE 1 — ENGINEER CHART (per truck): 3 panels + optional inset
+==============================================================================
+HEADER LINE (top): VIN | ridge_prob + risk tier (STATIC = whole-life, not a
+  countdown) | age | service state | S(age) | est. km | failed/in-service.
+
+------------------------------------------------------------------------------
+ PANEL A — FLEET RELIABILITY  S(t)
+------------------------------------------------------------------------------
+SHOWS : the fleet-wide probability a truck is still alive at age t (Weibull
+        survival curve, fit on n=10 failures), with an 80% posterior band.
+        - Black dot + dashed line = THIS truck's current age and its S(age).
+        - Red "|" ticks on the x-axis = the 10 actual observed failure ages.
+        - Dotted line at 601d = empirical median life.
+READ  : where the dot sits = how far through the fleet's life this truck is.
+        Dot high-left = young/healthy; dot low-right = deep in wear-out.
+        Band width = how uncertain the fleet curve is (small n=10).
+TAKEAWAY: "Where this truck sits on the population life curve, and how certain
+        that curve is."
+DON'T : read it as a per-truck failure date. Only the DOT is truck-specific;
+        the curve is the whole fleet.
+
+------------------------------------------------------------------------------
+ PANEL B — CONDITIONAL RUL DISTRIBUTION  (the centerpiece)
+------------------------------------------------------------------------------
+SHOWS : the probability distribution of Remaining Useful Life GIVEN the truck
+        survived to its current age (a right-skewed "violin").
+        - Ticks at p10 / median / p90 (days).
+        - Dash-dot line = the DEPLOYED fleet-clock estimate (601 - age).
+        - Failed trucks instead show "EVENT OBSERVED, RUL=0" against the grey
+          fleet density they were drawn from.
+READ  : the WIDTH (80% prediction interval) is the message. Wide = timing is
+        uncertain. median = central estimate; p10 = pessimistic (fails early);
+        p90 = optimistic (lasts longer). Use the fleet-clock number for actual
+        scheduling (it beat the per-truck model in backtest).
+TAKEAWAY: "How many days are left AND how uncertain that is. The spread is the
+        answer, not a single number."
+DON'T : treat the median as a precise countdown — the band is wide on purpose.
+
+------------------------------------------------------------------------------
+ PANEL C — VALIDATION  (alpha-lambda: predicted vs actual)
+------------------------------------------------------------------------------
+SHOWS : out-of-sample accuracy on the 10 failed trucks (rewound to T-270/-180/
+        -90 days). Same panel on every chart (fleet validation context).
+        - Dashed diagonal = perfect (pred = actual); grey wedge = +/-20% cone.
+        - Green squares = simple FLEET-CLOCK baseline.
+        - Coloured dots = the per-truck SURVIVAL MODEL (colour = horizon).
+        - Black ring = the current truck (if it is a failed truck).
+READ  : points ON/inside the cone = accurate; points ABOVE = over-prediction.
+        Green (dummy) hugs the diagonal; model dots sit high & scattered and do
+        NOT move toward the diagonal as failure nears.
+TAKEAWAY: "Measured proof that the per-truck timing model is worse than a simple
+        fleet constant (MAE ~142d vs ~50d) — so we deploy the fleet clock."
+
+------------------------------------------------------------------------------
+ PRECURSOR INSET  (appears on only 2 of 25 charts — this is honest, not a bug)
+------------------------------------------------------------------------------
+SHOWS : GED2 excitation-fault rate over the final ~40 days, for the only trucks
+        with an adversarially-VERIFIED precursor.
+        - VIN1_F : real ~21-day lead (a genuine early warning).
+        - VIN10_F: storm fires only ~1 day out (no usable lead).
+TAKEAWAY: 1 of 10 failures gives a true ~3-week warning; the other 23 charts
+        have NO inset = no precursor (bus voltage normal until failure).
+
+==============================================================================
+ FIGURE 2 — FLEET MAINTENANCE RUNWAY (whole in-service fleet)
+==============================================================================
+SHOWS : one horizontal bar per in-service truck, length = age (days since sale),
+        sorted TOP = highest classifier risk.
+        - Tan band = fleet wear-out window (578-652d); line at 601 = median.
+        - Red dot / "●" = HIGH risk;  blue dot / "○" = LOW risk.
+        - Right-side tag = replacement status (OVERDUE +Nd / DUE SOON / PLAN).
+        - Grey hatched row = STALE / BLIND (telemetry stopped; can't monitor).
+READ (5 seconds):
+        1. Top row first = today's #1 work order (highest risk).
+        2. Dot past the tan band = overdue for inspection/replacement.
+        3. Grey row = can't monitor -> fix telematics, fall back to fleet clock.
+        4. Red "●" = classifier-flagged high risk.
+TAKEAWAYS:
+        - Usually ONE HIGH-risk in-service truck (VIN3_NF) = act on it first.
+        - Most trucks are already PAST the 601d median: this is population
+          wear-out, NOT an expiry date — do not panic-replace the whole fleet.
+        - The 3 grey rows (VIN8/9/15_NF) are blind (no recent telemetry).
+
+==============================================================================
+ DECISION RECIPE (how to use the two figures together)
+==============================================================================
+  STEP 1  Open the FLEET RUNWAY -> read top-down for priority. Act on HIGH-risk
+          + past-band first; queue telematics fixes for the grey/blind trucks.
+  STEP 2  For any flagged truck, open its ENGINEER CHART:
+          - Panel A: how far through life it is (dot on S(t)).
+          - Panel B: remaining-life BAND in days + the fleet-clock number to
+            put on the schedule.
+          - Panel C: reminder the date is a fleet estimate, not a prediction.
+          - Inset (if present): a genuine short-term precursor -> treat urgent.
+
+==============================================================================
+ WHAT THESE CHARTS DELIBERATELY DO NOT CLAIM (honest limits)
+==============================================================================
+  - No exact per-truck failure date. RUL = fleet clock; irreducible error ~50d.
+  - "Risk" (classifier, AUROC 0.927) = WHICH trucks fail, not WHEN.
+  - A real degradation precursor exists for only 1/10 trucks; a flat signal is
+    genuinely flat (regulated ~28V until failure), not a missing sensor.
+  - km / engine-hours are ESTIMATED (speed-integrated, not odometer).
+  - Everything rests on n=10 failures -> wide uncertainty everywhere.
+
+==============================================================================
+ GLOSSARY
+==============================================================================
+  S(t)            Survival probability (fraction still running at age t).
+  Posterior band  80% credible range of the fleet survival curve.
+  Failure rug     "|" ticks marking the 10 actual failure ages.
+  Violin (Panel B) Distribution of remaining life; width = uncertainty.
+  p10/median/p90  10th / 50th / 90th percentile of remaining-life days.
+  Fleet clock     Deployed RUL estimate = 601 - age (days).
+  alpha-lambda    Predicted-vs-actual accuracy plot; +/-20% = "within spec".
+  Risk tier       GREEN <0.35 | AMBER 0.35-0.55 | RED >=0.55  (ridge_prob).
+  State           NORMAL / DEGRADING (GED storm) / LATE (collapse).
+  STALE / BLIND   No recent telemetry; truck cannot be monitored.
+==============================================================================
