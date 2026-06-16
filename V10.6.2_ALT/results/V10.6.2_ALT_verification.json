@@ -1,0 +1,63 @@
+{
+  "gates": [
+    {
+      "name": "ridge_integrity",
+      "status": "PASS",
+      "gating": true,
+      "details": "ridge_prob_rescaled.csv sha256=a6bc43acf67a..., rows=25; forbidden-pattern hits in src: none"
+    },
+    {
+      "name": "cohort_25",
+      "status": "PASS",
+      "gating": true,
+      "details": "n_cohort=25, n_events=10 (expect 25/10)"
+    },
+    {
+      "name": "posterior_shape_used",
+      "status": "PASS",
+      "gating": true,
+      "details": "reported shape=5.1658 == posterior_map=5.1658; MLE=6.5736 (must differ)"
+    },
+    {
+      "name": "backtest_vs_dummy",
+      "status": "DOCUMENTED",
+      "gating": false,
+      "details": "verdict=no_improvement; rewound MAE model=141.8d vs dummyA=49.7d; signed_rank_p=0.0; total-TTF MAE model=125.0d vs dummyA=49.7d"
+    },
+    {
+      "name": "pi_coverage",
+      "status": "PASS",
+      "gating": true,
+      "details": "total-TTF PI coverage=9/10 (gate>= 80%); rewound coverage=0.867"
+    },
+    {
+      "name": "decision_sanity",
+      "status": "PASS",
+      "gating": true,
+      "details": "1 CRITICAL rows; 0 with ridge_prob<0.4456 (must be 0)"
+    },
+    {
+      "name": "failed_vin_handling",
+      "status": "PASS",
+      "gating": true,
+      "details": "10 failed; all RUL=0: True; would_have_flagged present: True"
+    },
+    {
+      "name": "ged_oos_documented",
+      "status": "DOCUMENTED",
+      "gating": false,
+      "details": "daily>= 200/day: sensitivity 2/10, false alarms 0/15"
+    },
+    {
+      "name": "reports_clean",
+      "status": "PASS",
+      "gating": true,
+      "details": "B1 params has median_ttf_days=True; B2 gates keyed by name=True; prior report clean: True"
+    }
+  ],
+  "n_gating": 7,
+  "n_gating_pass": 7,
+  "n_gating_fail": 0,
+  "n_documented": 2,
+  "overall_pass": true
+}

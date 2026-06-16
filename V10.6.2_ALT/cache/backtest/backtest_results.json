@@ -1,0 +1,53 @@
+{
+  "cohort": "all_25",
+  "n_events": 10,
+  "per_fold_refit": true,
+  "lovo_total_ttf": {
+    "n": 10,
+    "mae_model": 125.0,
+    "median_ae_model": 125.4,
+    "mae_dummyA": 49.7,
+    "pi_coverage": 0.9,
+    "signed_rank_p": 0.0254,
+    "pi_coverage_k_of_n": "9/10",
+    "pi_gate_pass": true
+  },
+  "time_rewound": {
+    "overall": {
+      "n": 30,
+      "mae_model": 141.8,
+      "median_ae_model": 135.2,
+      "mae_dummyA": 49.7,
+      "pi_coverage": 0.867,
+      "signed_rank_p": 0.0
+    },
+    "by_horizon": {
+      "270": {
+        "n": 10,
+        "mae_model": 130.4,
+        "median_ae_model": 128.6,
+        "mae_dummyA": 49.7,
+        "pi_coverage": 0.9,
+        "signed_rank_p": 0.0098
+      },
+      "180": {
+        "n": 10,
+        "mae_model": 140.0,
+        "median_ae_model": 137.7,
+        "mae_dummyA": 49.7,
+        "pi_coverage": 0.9,
+        "signed_rank_p": 0.0039
+      },
+      "90": {
+        "n": 10,
+        "mae_model": 154.8,
+        "median_ae_model": 150.8,
+        "mae_dummyA": 49.7,
+        "pi_coverage": 0.8,
+        "signed_rank_p": 0.002
+      }
+    },
+    "verdict": "no_improvement"
+  },
+  "interpretation": "Tier-A RUL is age-only; the honest question is whether the survival shape beats a linear fleet-clock subtraction. Verdict + coverage below."
+}

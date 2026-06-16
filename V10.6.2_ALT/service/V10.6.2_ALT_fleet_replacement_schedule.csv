@@ -1,0 +1,16 @@
+vin_label,current_age_days,fleet_clock_rul_days,replacement_status,risk_tier,state,recommended_action
+VIN3_NF_ALT,693.0,0.0,OVERDUE (+92d past fleet median 601d),HIGH_RISK,NORMAL,PRIORITY: high failure risk + past/near fleet replacement age — add alternator inspection at next depot visit.
+VIN11_NF_ALT,766.0,0.0,OVERDUE (+165d past fleet median 601d),LOW_RISK,NORMAL,Schedule alternator inspection: past fleet median wear-out age.
+VIN10_NF_ALT,761.0,0.0,OVERDUE (+160d past fleet median 601d),LOW_RISK,NORMAL,Schedule alternator inspection: past fleet median wear-out age.
+VIN2_NF_ALT,758.0,0.0,OVERDUE (+157d past fleet median 601d),LOW_RISK,NORMAL,Schedule alternator inspection: past fleet median wear-out age.
+VIN1_NF_ALT,747.0,0.0,OVERDUE (+146d past fleet median 601d),LOW_RISK,NORMAL,Schedule alternator inspection: past fleet median wear-out age.
+VIN6_NF_ALT,727.0,0.0,OVERDUE (+126d past fleet median 601d),LOW_RISK,NORMAL,Schedule alternator inspection: past fleet median wear-out age.
+VIN5_NF_ALT,721.0,0.0,OVERDUE (+120d past fleet median 601d),LOW_RISK,NORMAL,Schedule alternator inspection: past fleet median wear-out age.
+VIN7_NF_ALT,719.0,0.0,OVERDUE (+118d past fleet median 601d),LOW_RISK,NORMAL,Schedule alternator inspection: past fleet median wear-out age.
+VIN13_NF_ALT,691.0,0.0,OVERDUE (+90d past fleet median 601d),LOW_RISK,NORMAL,Schedule alternator inspection: past fleet median wear-out age.
+VIN4_NF_ALT,685.0,0.0,OVERDUE (+84d past fleet median 601d),LOW_RISK,NORMAL,Schedule alternator inspection: past fleet median wear-out age.
+VIN14_NF_ALT,656.0,0.0,OVERDUE (+55d past fleet median 601d),LOW_RISK,NORMAL,Schedule alternator inspection: past fleet median wear-out age.
+VIN15_NF_ALT,634.0,0.0,OVERDUE (+33d past fleet median 601d),LOW_RISK,NORMAL,BLIND: telemetry stale/sparse — cannot monitor; fall back to fleet-clock schedule & fix telematics (or confirm decommissioned).
+VIN12_NF_ALT,581.0,20.0,DUE SOON (~20d to fleet median),LOW_RISK,NORMAL,Plan alternator replacement within ~2 months (approaching fleet wear-out window).
+VIN9_NF_ALT,574.0,27.0,DUE SOON (~27d to fleet median),LOW_RISK,NORMAL,BLIND: telemetry stale/sparse — cannot monitor; fall back to fleet-clock schedule & fix telematics (or confirm decommissioned).
+VIN8_NF_ALT,513.0,88.0,Plan <6mo (~88d to fleet median),LOW_RISK,NORMAL,BLIND: telemetry stale/sparse — cannot monitor; fall back to fleet-clock schedule & fix telematics (or confirm decommissioned).
