@@ -1,0 +1,13 @@
+{
+  "shape": 5.1658,
+  "scale": 771.36,
+  "median": 718.5,
+  "median_ttf_days": 718.5,
+  "ci_lower": 677.3,
+  "ci_upper": 774.4,
+  "ci_width_days": 97.1,
+  "ci_method": "posterior_grid_sampling",
+  "n_cohort": 25,
+  "n_events": 10,
+  "cohort": "all_25"
+}

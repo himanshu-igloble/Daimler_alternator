@@ -1,0 +1,14 @@
+{
+  "variant": "M0",
+  "map_shape": 5.1658,
+  "map_scale0": 771.36,
+  "map_beta": [
+    0.0
+  ],
+  "grid_n_shape": 200,
+  "grid_n_scale": 200,
+  "n_draws": 10000,
+  "n_cohort": 25,
+  "n_events": 10,
+  "cohort": "all_25"
+}
