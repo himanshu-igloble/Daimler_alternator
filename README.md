@@ -45,17 +45,29 @@ git switch main              # see ALL THREE
 
 ---
 
-## 2. The three versions at a glance
+## 2. Version comparison
 
-| | **V10.6.2** — Honest Baseline | **V11** — Lead-Time Heuristics | **V11.1** — Covariate RUL |
+Full metric-by-metric comparison of all three curated versions. The classifier and fleet curve are
+**frozen and identical** across all three; the differences are entirely in the emergency channel and in
+the (negative) per-truck-RUL findings.
+
+| Dimension | **V10.6.2** — Honest Baseline | **V11** — Lead-Time Heuristics | **V11.1** — Covariate RUL |
 |---|---|---|---|
-| Question | Does *per-truck RUL* beat the fleet clock? | Can new heuristics improve *lead-time recall*? | Can *AFT covariates* individualize RUL? |
-| Classifier (WHICH) | V10.5.3 frozen, LOVO AUROC **0.927** | **Same** 0.927 (frozen) | **Same** 0.927 (frozen) |
-| Fleet window (WHEN) | Weibull, empirical median **601 d** (≈120 440 km / 4 538 eng-h) | **Same** curve | **Same** curve (M0 ≡ V10.6.2) |
-| Per-truck RUL | backtest MAE **142 d** vs fleet-clock **50 d** → `no_improvement` | not addressed (precursor-only) | M0 **140.4** / M1 148.8 / M2 162.2 d vs dummy 49.7 → covariates worse |
-| Precursor recall (emergency) | **5/10** forensic · **2/10** GED-only | **6/10** forensic · **0/15** false alarms | **3/10** current-state early-watch · **0/15** false alarms |
-| New work | — | **12 heuristics**; MVP = post-crank recovery (`crank_recovery_t`) | AFT covariates `x1`/`x2`; 3 alert channels |
-| Verdict | NO_IMPROVEMENT — ship fleet curve + GED monitor | Modest gain: +1 truck (VIN9), +1 earlier (VIN1) | NO_IMPROVEMENT_HONEST — covariates exposure-confounded, M0 wins |
+| Branch | [`v10.6.2-alt`](https://github.com/himanshu-igloble/Daimler_alternator/tree/v10.6.2-alt) | [`v11-alt`](https://github.com/himanshu-igloble/Daimler_alternator/tree/v11-alt) | [`v11.1-alt-curated`](https://github.com/himanshu-igloble/Daimler_alternator/tree/v11.1-alt-curated) |
+| Question asked | Does *per-truck RUL* beat the fleet clock? | Can new heuristics improve *lead-time recall*? | Can *AFT covariates* individualize RUL? |
+| Classifier — WHICH (AUROC) | **0.927** (V10.5.3 frozen, LOVO) | 0.927 (frozen, unchanged) | 0.927 (frozen, unchanged) |
+| Fleet window — WHEN, fleet | Weibull median **601 d** (≈120 440 km / 4 538 eng-h) | same curve | same curve (M0 ≡ V10.6.2) |
+| Per-truck RUL — point (MAE) | **142 d** | not addressed (precursor-only) | M0 **140.4** / M1 148.8 / M2 162.2 d |
+| Fleet-clock dummy (MAE) | 50 d | — | 49.7 d |
+| Per-truck RUL verdict | worse than dummy → `no_improvement` | — | covariates worse → M0 wins, β shelved |
+| RUL interval | 80% band, 9/10 coverage | — | 80% band (currently age-driven) |
+| Precursor recall — forensic | 5/10 | **6/10** | inherits V11 (6/10) |
+| Deployable emergency channel | GED=2 storm (**2/10**) | GED=2 **+ post-crank recovery** | 3 channels incl. current-state watch (**3/10**) |
+| NF false alarms | **0/15** | **0/15** | **0/15** |
+| New work | — | **12 heuristics**; MVP `crank_recovery_t` | AFT covariates `x1`/`x2` |
+| Headline change | baseline established | +VIN9 detected, VIN1 earlier (30→60 d) | per-truck RUL closed at n=25 |
+| Deliverable shape | WHICH + WHEN-fleet + WHEN-emergency | same (emergency fires earlier) | same (3 alert channels) |
+| **Verdict** | **NO_IMPROVEMENT** | **modest gain** | **NO_IMPROVEMENT_HONEST** |
 
 **Head-to-head docs:** [`VERSION_COMPARISON_V10.6.2_vs_V11.md`](./VERSION_COMPARISON_V10.6.2_vs_V11.md) (2-way) and
 [`VERSION_COMPARISON_V10.6.2_vs_V11_vs_V11.1.md`](./VERSION_COMPARISON_V10.6.2_vs_V11_vs_V11.1.md) (full 3-way).
