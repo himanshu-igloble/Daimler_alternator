@@ -33,7 +33,7 @@ work lives in its own repo: <https://github.com/himanshu-igloble/Daimler_Starter
 | **`v10.6.2-alt`** | **Only** the V10.6.2 deliverable (honest baseline) | Check out / roll back to V10.6.2 in isolation |
 | **`v11-alt`** | **Only** the V11 deliverable (lead-time heuristics) | Check out / roll back to V11 in isolation |
 | **`v11.1-alt-curated`** | **Only** the V11.1 deliverable (covariate RUL) | Check out / roll back to V11.1 in isolation |
-| **`v11.1-alt`** | Full dev branch — V11.1 plus the complete `docs/` history (and, as historical record, the original `STARTER MOTOR/` work — now maintained in [its own repo](https://github.com/himanshu-igloble/Daimler_Starter-motor)) | Inspect the full development history |
+| **`v11.1-alt`** | Full dev branch — V11.1 plus the complete `docs/` history. (The starter-motor work it once carried now lives in [its own repo](https://github.com/himanshu-igloble/Daimler_Starter-motor) — removed from this branch's tip, retained only in older history.) | Inspect the full development history |
 
 ```bash
 git clone https://github.com/himanshu-igloble/Daimler_alternator
