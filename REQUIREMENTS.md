@@ -25,13 +25,15 @@ over-promising a per-truck failure date that the data cannot support**.
 | FR-3 | Emit an **emergency precursor** alert for trucks that show one (**WHEN, truck**) | GED=2 storm monitor (V10.6.2); GED=2 **+ post-crank recovery** (V11) | ✅ both versions |
 | FR-4 | Provide a per-truck RUL **band** (interval), clearly caveated | Survival-conditioned 80% interval (point estimate flagged as non-actionable) | ✅ V10.6.2 |
 | FR-5 | Improve lead-time recall with new heuristics, **only if it survives an honest gate** | 12 candidate heuristics; recall 5/10 → **6/10**, 0/15 false alarms | ✅ V11 |
-| FR-6 | Ship human- and machine-readable outputs | `reports/` (md + xlsx), `results/` (csv + json), `service/` tables, `presentation/` decks | ✅ both versions |
-| FR-7 | Be **reproducible end-to-end** and self-gating | Orchestrator + `verify` stage (exits non-zero on gate failure) | ✅ both versions |
+| FR-6 | Ship human- and machine-readable outputs | `reports/` (md + xlsx), `results/` (csv + json), `service/` tables, `presentation/` decks | ✅ all versions |
+| FR-7 | Be **reproducible end-to-end** and self-gating | Orchestrator + `verify` stage (exits non-zero on gate failure) | ✅ all versions |
+| FR-8 | Test whether **AFT covariates** can individualize per-truck RUL, **only if honest** | AFT M0/M1/M2; covariates exposure-confounded → M0 (≡ V10.6.2) wins, β shelved | ✅ V11.1 (NO_IMPROVEMENT_HONEST) |
 
 **Explicit non-goal (out of scope):** a trustworthy per-truck *days-to-failure* number. V10.6.2's
 out-of-sample backtest shows the survival RUL point estimate (MAE **142 d**) does **not** beat a naive
-fleet-clock baseline (**50 d**) at n=25 — so per-truck RUL is shipped as a wide band, not a date, and
-V11 does not attempt to individualise it further.
+fleet-clock baseline (**50 d**) at n=25; **V11.1** confirmed this from the other direction — adding AFT
+covariates made it *worse* (M0 140.4 d < M1 148.8 d < M2 162.2 d). So per-truck RUL is shipped as a wide
+band, not a date, across all three versions.
 
 ---
 

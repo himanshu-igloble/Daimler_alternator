@@ -17,49 +17,52 @@ The project answers three operational questions from on-board CAN-bus telemetry:
 ## 1. Repository & branch map
 
 This repo keeps **each version on its own branch** so you can return to any version at any time, and
-`main` carries **both** versions merged together.
+`main` carries **all three** curated versions merged together.
 
 | Branch | What's on it | Use it to… |
 |---|---|---|
-| **`main`** | Both versions (`V10.6.2_ALT/` + `V11_ALT_heuristics/`) + this README + requirements + comparison | Browse everything in one place |
+| **`main`** | All three curated versions (`V10.6.2_ALT/` + `V11_ALT_heuristics/` + `V11.1_ALT/`) + this README + requirements + comparisons | Browse everything in one place |
 | **`v10.6.2-alt`** | **Only** the V10.6.2 deliverable (honest baseline) | Check out / roll back to V10.6.2 in isolation |
 | **`v11-alt`** | **Only** the V11 deliverable (lead-time heuristics) | Check out / roll back to V11 in isolation |
+| **`v11.1-alt-curated`** | **Only** the V11.1 deliverable (covariate RUL) | Check out / roll back to V11.1 in isolation |
+| **`v11.1-alt`** | Full dev branch — V11.1 **plus** the `STARTER MOTOR/` work and the complete `docs/` history | Inspect the full development history |
 
 ```bash
 git clone https://github.com/himanshu-igloble/Daimler_alternator
 cd Daimler_alternator
-git switch v10.6.2-alt   # see ONLY V10.6.2
-git switch v11-alt       # see ONLY V11
-git switch main          # see BOTH
+git switch v10.6.2-alt        # see ONLY V10.6.2
+git switch v11-alt            # see ONLY V11
+git switch v11.1-alt-curated  # see ONLY V11.1 (curated)
+git switch main              # see ALL THREE
 ```
 
 ---
 
-## 2. The two versions at a glance
+## 2. The three versions at a glance
 
-| | **V10.6.2** — Honest Baseline | **V11** — Lead-Time Heuristics |
-|---|---|---|
-| Question | Does *per-truck RUL* beat the fleet clock? | Can new heuristics improve *lead-time recall*? |
-| Classifier (WHICH) | V10.5.3 frozen, LOVO AUROC **0.927** | **Same** 0.927 (frozen) |
-| Fleet window (WHEN) | Weibull, empirical median **601 d** (≈120 440 km / 4 538 eng-h) | **Same** curve |
-| Per-truck RUL | backtest MAE **142 d** vs fleet-clock **50 d** → `no_improvement` | not addressed (precursor-only) |
-| Precursor recall (emergency) | **5/10** forensic · **2/10** GED-only deployable | **6/10** forensic · **0/15** false alarms |
-| New work | — | **12 heuristics**; MVP = post-crank recovery (`crank_recovery_t`) |
-| Verdict | NO_IMPROVEMENT — ship fleet curve + GED monitor | Modest gain: +1 truck (VIN9), +1 earlier (VIN1) |
+| | **V10.6.2** — Honest Baseline | **V11** — Lead-Time Heuristics | **V11.1** — Covariate RUL |
+|---|---|---|---|
+| Question | Does *per-truck RUL* beat the fleet clock? | Can new heuristics improve *lead-time recall*? | Can *AFT covariates* individualize RUL? |
+| Classifier (WHICH) | V10.5.3 frozen, LOVO AUROC **0.927** | **Same** 0.927 (frozen) | **Same** 0.927 (frozen) |
+| Fleet window (WHEN) | Weibull, empirical median **601 d** (≈120 440 km / 4 538 eng-h) | **Same** curve | **Same** curve (M0 ≡ V10.6.2) |
+| Per-truck RUL | backtest MAE **142 d** vs fleet-clock **50 d** → `no_improvement` | not addressed (precursor-only) | M0 **140.4** / M1 148.8 / M2 162.2 d vs dummy 49.7 → covariates worse |
+| Precursor recall (emergency) | **5/10** forensic · **2/10** GED-only | **6/10** forensic · **0/15** false alarms | **3/10** current-state early-watch · **0/15** false alarms |
+| New work | — | **12 heuristics**; MVP = post-crank recovery (`crank_recovery_t`) | AFT covariates `x1`/`x2`; 3 alert channels |
+| Verdict | NO_IMPROVEMENT — ship fleet curve + GED monitor | Modest gain: +1 truck (VIN9), +1 earlier (VIN1) | NO_IMPROVEMENT_HONEST — covariates exposure-confounded, M0 wins |
 
-**Full head-to-head:** see [`VERSION_COMPARISON_V10.6.2_vs_V11.md`](./VERSION_COMPARISON_V10.6.2_vs_V11.md)
-(identical on all three branches).
+**Head-to-head docs:** [`VERSION_COMPARISON_V10.6.2_vs_V11.md`](./VERSION_COMPARISON_V10.6.2_vs_V11.md) (2-way) and
+[`VERSION_COMPARISON_V10.6.2_vs_V11_vs_V11.1.md`](./VERSION_COMPARISON_V10.6.2_vs_V11_vs_V11.1.md) (full 3-way).
 
 ---
 
 ## 3. How to navigate the project
 
-Both versions follow the **same directory grammar**, so once you can read one you can read the other.
+All three versions follow the **same directory grammar**, so once you can read one you can read the others.
 
 ```
-V10.6.2_ALT/  (and  V11_ALT_heuristics/)
+V10.6.2_ALT/  (and  V11_ALT_heuristics/,  V11.1_ALT/)
 ├── src/              # the pipeline — config + one module per stage + an orchestrator
-├── tests/            # unit tests (V11 only)
+├── tests/            # unit tests (V11 and V11.1)
 ├── cache/            # committed intermediates → reports reproduce WITHOUT the 14.5 GB raw data
 │   ├── forensics/    #   per-VIN daily aggregates (VIN*_daily.csv) — the real pipeline input here
 │   ├── weibull/      #   fleet survival fit (params, posterior, curve)
@@ -81,6 +84,7 @@ V10.6.2_ALT/  (and  V11_ALT_heuristics/)
 **Pipeline order**
 - **V10.6.2:** `weibull_fleet → predictive_rul → backtest → ged_emergency → decisions → assemble_rul → rul_graphs → narrative_rul → markdown_report → excel_report → verify` (verify is the honest gate, runs last).
 - **V11:** `forensic → changepoint → compound → verify → compare` (classifier & Weibull are reused by reference, not re-fit).
+- **V11.1:** `weibull_fleet → covariates → survival (AFT M0/M1/M2) → predictive_rul → backtest → emergency → decisions → assemble_rul → rul_graphs → narrative_rul → markdown_report → excel_report → summary_docx → verify`.
 
 ---
 
@@ -97,9 +101,11 @@ pip install numpy pandas scipy matplotlib lifelines openpyxl python-pptx
 # Reproduce a version end-to-end (runs from the committed cache/ — no raw data needed):
 python V10.6.2_ALT/src/V10.6.2_ALT_orchestrator.py
 python V11_ALT_heuristics/src/V11_ALT_heuristics_orchestrator.py
+python V11.1_ALT/src/V11_1_ALT_orchestrator.py
 
-# V11 unit tests
+# unit tests
 pytest V11_ALT_heuristics/tests
+pytest V11.1_ALT/tests
 ```
 
 > On Windows the project was developed with `py -3 <script>` (the repo `.venv` historically lacked
@@ -125,7 +131,9 @@ pytest V11_ALT_heuristics/tests
 ## 6. Bottom line
 
 The **classifier (AUROC 0.927)** and the **fleet replacement window (median 601 d)** are the trustworthy,
-deployable deliverables and are identical across both versions. **V11** adds one genuinely useful early
-signal — post-crank voltage recovery — that catches **one extra failing truck** and gives an **earlier
-warning on another**, with **zero false alarms**, but does **not** change the structural limit: at n=25
+deployable deliverables and are identical across **all three** versions. **V11** adds one genuinely useful
+early signal — post-crank voltage recovery — that catches **one extra failing truck** and gives an
+**earlier warning on another**, with **zero false alarms**. **V11.1** then closes the per-truck-RUL
+question for good at this sample size: AFT covariates are exposure-confounded, so the covariate-free M0
+(≡ the V10.6.2 fleet curve) wins and β is shelved. None of the three change the structural limit: at n=25
 there is no reliable per-truck "days-to-failure" number. Ship the **rank + window + emergency monitor**.
