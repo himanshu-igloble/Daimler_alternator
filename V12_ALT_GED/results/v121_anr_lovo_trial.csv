@@ -1,0 +1,7 @@
+set,auroc_additive,delta,single_feat_auroc
+FAMILY_A,0.9267,0.0,
++anr_idle_mean,0.8733,-0.0533,0.16
++anr_idle_resid_mean,0.8733,-0.0533,0.1467
++anr_idle_resid_slope_30d,0.8933,-0.0333,0.1067
++anr_idle_resid_oscillation,0.88,-0.0467,0.1067
++ALL_ANR,0.8733,-0.0533,

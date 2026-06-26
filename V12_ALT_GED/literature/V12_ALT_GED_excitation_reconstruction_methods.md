@@ -80,6 +80,22 @@ Covered across (1)–(4) above. The relevant primary literature is the observer 
 - What cross-truck **transfer error** is achievable at n≈25 for the reference-truck-instrumentation route?
 - What real accuracy can a grey-box alternator regulation-effort proxy reach (no automotive benchmark exists yet)?
 
+## V12.1 — empirical test of the #1 recommended avenue (idle-ANR load proxy)
+
+We built and LOVO-tested the top-ranked feasible avenue (engine-torque residual → alternator electrical-load proxy), **idle-conditioned** per the physics: rows with engine on, stationary (`CSP<3`), not cranking, RPM ∈ [500,800], where propulsion torque ≈ 0 so ANR ≈ accessory load. Per-VIN features = idle-ANR mean and the residual vs the healthy-fleet idle-ANR baseline (per 50-rpm bin): `anr_idle_mean, anr_idle_resid_mean, anr_idle_resid_slope_30d, anr_idle_resid_oscillation`. Code: `src/proxy_anr_torque.py`, `src/trial_v121_anr.py`; results: `results/v121_anr_features.csv`, `results/v121_anr_lovo_trial.csv`.
+
+**Result — REJECTED (data ceiling holds).** Under the frozen LOVO protocol (baseline FAMILY_A reproduced exactly at **0.9267** as a gate):
+
+| feature added | single-feature LOVO AUROC | AUROC w/ FAMILY_A | Δ vs 0.9267 |
+|---|---|---|---|
+| anr_idle_mean | 0.160 | 0.8733 | −0.0533 |
+| anr_idle_resid_mean | 0.147 | 0.8733 | −0.0533 |
+| anr_idle_resid_slope_30d | 0.107 | 0.8933 | −0.0333 |
+| anr_idle_resid_oscillation | 0.107 | 0.8800 | −0.0467 |
+| ALL four | — | 0.8733 | −0.0533 |
+
+Every feature *hurts*; single-feature AUROCs of 0.11–0.16 are **anti-predictive** (failed trucks show slightly *lower* idle-ANR — 18.5 vs 24.8 Nm — the opposite of load-elevation). Two compounding reasons, both anticipated by the survey: (a) the ~1–5 Nm alternator drag is **swamped** by other idle accessories (AC, cooling fan) that vary by route/climate, not alternator health; (b) **5 VINs are idle-sparse** (≤2.8k idle rows vs 307k–1.3M), with inflated 40–81 Nm residuals — and these are **exactly the 5 near-total-GED-null VINs** from Phase-2E (VIN3_F, VIN4_F, VIN8_NF, VIN9_NF, VIN15_NF), i.e., a consistent **telemetry-coverage artifact** across independent analyses, not a component signal. **Verdict:** the idle-ANR load proxy is too confounded at this granularity to separate failures or beat the 0.927 ceiling — empirically confirming the survey's separability caveat. The honest conclusion stands: real alternator-load signal needs added instrumentation (SPN 115 output current, or LIN `RMC`), not a torque residual from the 6-signal feed.
+
 ## Sources (verified set)
 - Eull, Parker, Preindl — linear Luenberger observer, WRSM current estimation, IEEE ITEC 2022 — strathprints.strath.ac.uk/81564
 - *Model of Automotive Alternator Output Voltage with Rectifier and Voltage Regulator* — ResearchGate 385188775
