@@ -1,0 +1,254 @@
+{
+  "status": "COMPLETE",
+  "target_col": "crank_recovery_t",
+  "n_vins": 25,
+  "mw_auroc": 0.6333333333333333,
+  "mw_pval": 0.2794012405091344,
+  "ged_silent_f_vins": [
+    "VIN2_F_ALT",
+    "VIN3_F_ALT",
+    "VIN4_F_ALT",
+    "VIN5_F_ALT",
+    "VIN6_F_ALT",
+    "VIN7_F_ALT",
+    "VIN8_F_ALT",
+    "VIN9_F_ALT"
+  ],
+  "ged_silent_slopes": [
+    1.601248,
+    -0.004555,
+    -0.014265,
+    -0.003384,
+    0.608386,
+    -2e-06,
+    2.968585,
+    0.002559
+  ],
+  "per_vin": [
+    {
+      "vin": "VIN1_F_ALT",
+      "failed": true,
+      "n_obs": 237,
+      "base_mean": 0.01516,
+      "base_std": 0.07374,
+      "last60_slope": 0.000626,
+      "norm_slope": 0.008492
+    },
+    {
+      "vin": "VIN2_F_ALT",
+      "failed": true,
+      "n_obs": 144,
+      "base_mean": 0.00442,
+      "base_std": 0.0282,
+      "last60_slope": 0.045162,
+      "norm_slope": 1.601248
+    },
+    {
+      "vin": "VIN3_F_ALT",
+      "failed": true,
+      "n_obs": 146,
+      "base_mean": 0.63364,
+      "base_std": 3.01423,
+      "last60_slope": -0.01373,
+      "norm_slope": -0.004555
+    },
+    {
+      "vin": "VIN4_F_ALT",
+      "failed": true,
+      "n_obs": 219,
+      "base_mean": 0.01587,
+      "base_std": 0.12528,
+      "last60_slope": -0.001787,
+      "norm_slope": -0.014265
+    },
+    {
+      "vin": "VIN5_F_ALT",
+      "failed": true,
+      "n_obs": 199,
+      "base_mean": 0.00061,
+      "base_std": 0.00177,
+      "last60_slope": -6e-06,
+      "norm_slope": -0.003384
+    },
+    {
+      "vin": "VIN6_F_ALT",
+      "failed": true,
+      "n_obs": 193,
+      "base_mean": 0.00048,
+      "base_std": 0.00187,
+      "last60_slope": 0.00114,
+      "norm_slope": 0.608386
+    },
+    {
+      "vin": "VIN7_F_ALT",
+      "failed": true,
+      "n_obs": 198,
+      "base_mean": 0.2394,
+      "base_std": 2.55515,
+      "last60_slope": -5e-06,
+      "norm_slope": -2e-06
+    },
+    {
+      "vin": "VIN8_F_ALT",
+      "failed": true,
+      "n_obs": 134,
+      "base_mean": 0.00106,
+      "base_std": 0.00279,
+      "last60_slope": 0.008278,
+      "norm_slope": 2.968585
+    },
+    {
+      "vin": "VIN9_F_ALT",
+      "failed": true,
+      "n_obs": 289,
+      "base_mean": 0.04535,
+      "base_std": 0.48477,
+      "last60_slope": 0.00124,
+      "norm_slope": 0.002559
+    },
+    {
+      "vin": "VIN10_F_ALT",
+      "failed": true,
+      "n_obs": 238,
+      "base_mean": 0.02518,
+      "base_std": 0.27418,
+      "last60_slope": 0.010939,
+      "norm_slope": 0.039899
+    },
+    {
+      "vin": "VIN1_NF_ALT",
+      "failed": false,
+      "n_obs": 185,
+      "base_mean": 0.0009,
+      "base_std": 0.00231,
+      "last60_slope": 6.4e-05,
+      "norm_slope": 0.027754
+    },
+    {
+      "vin": "VIN2_NF_ALT",
+      "failed": false,
+      "n_obs": 182,
+      "base_mean": 0.06052,
+      "base_std": 0.46129,
+      "last60_slope": 0.032775,
+      "norm_slope": 0.07105
+    },
+    {
+      "vin": "VIN3_NF_ALT",
+      "failed": false,
+      "n_obs": 377,
+      "base_mean": 0.16134,
+      "base_std": 1.79713,
+      "last60_slope": 0.000409,
+      "norm_slope": 0.000228
+    },
+    {
+      "vin": "VIN4_NF_ALT",
+      "failed": false,
+      "n_obs": 350,
+      "base_mean": 0.10947,
+      "base_std": 0.75965,
+      "last60_slope": 0.000232,
+      "norm_slope": 0.000305
+    },
+    {
+      "vin": "VIN5_NF_ALT",
+      "failed": false,
+      "n_obs": 322,
+      "base_mean": 0.23025,
+      "base_std": 2.08918,
+      "last60_slope": -0.011803,
+      "norm_slope": -0.00565
+    },
+    {
+      "vin": "VIN6_NF_ALT",
+      "failed": false,
+      "n_obs": 306,
+      "base_mean": 0.00093,
+      "base_std": 0.00382,
+      "last60_slope": -1.3e-05,
+      "norm_slope": -0.003451
+    },
+    {
+      "vin": "VIN7_NF_ALT",
+      "failed": false,
+      "n_obs": 277,
+      "base_mean": 0.17278,
+      "base_std": 2.0482,
+      "last60_slope": 0.006174,
+      "norm_slope": 0.003015
+    },
+    {
+      "vin": "VIN8_NF_ALT",
+      "failed": false,
+      "n_obs": 429,
+      "base_mean": 0.03312,
+      "base_std": 0.10396,
+      "last60_slope": 6e-06,
+      "norm_slope": 6.1e-05
+    },
+    {
+      "vin": "VIN9_NF_ALT",
+      "failed": false,
+      "n_obs": 181,
+      "base_mean": 0.31334,
+      "base_std": 1.93532,
+      "last60_slope": 0.0,
+      "norm_slope": 0.0
+    },
+    {
+      "vin": "VIN10_NF_ALT",
+      "failed": false,
+      "n_obs": 162,
+      "base_mean": 0.00163,
+      "base_std": 0.00434,
+      "last60_slope": -0.003923,
+      "norm_slope": -0.904665
+    },
+    {
+      "vin": "VIN11_NF_ALT",
+      "failed": false,
+      "n_obs": 174,
+      "base_mean": 0.01182,
+      "base_std": 0.0645,
+      "last60_slope": 0.000819,
+      "norm_slope": 0.012699
+    },
+    {
+      "vin": "VIN12_NF_ALT",
+      "failed": false,
+      "n_obs": 283,
+      "base_mean": 0.00518,
+      "base_std": 0.0546,
+      "last60_slope": -6.3e-05,
+      "norm_slope": -0.001153
+    },
+    {
+      "vin": "VIN13_NF_ALT",
+      "failed": false,
+      "n_obs": 197,
+      "base_mean": 0.01754,
+      "base_std": 0.18986,
+      "last60_slope": 1.6e-05,
+      "norm_slope": 8.6e-05
+    },
+    {
+      "vin": "VIN14_NF_ALT",
+      "failed": false,
+      "n_obs": 153,
+      "base_mean": 0.00162,
+      "base_std": 0.01249,
+      "last60_slope": -9e-06,
+      "norm_slope": -0.000736
+    },
+    {
+      "vin": "VIN15_NF_ALT",
+      "failed": false,
+      "n_obs": 350,
+      "base_mean": 0.21393,
+      "base_std": 2.0356,
+      "last60_slope": -0.007112,
+      "norm_slope": -0.003494
+    }
+  ]
+}
