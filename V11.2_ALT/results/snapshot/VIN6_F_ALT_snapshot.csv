@@ -1,0 +1,10 @@
+component,Early (2024-05-26),First deviation (2025-09-19),Failure (2025-09-30)
+Effective zone,GREEN,GREEN,GREEN
+RUL (schedule),663 d (GREEN),213 d (GREEN),205 d (GREEN)
+Condition (M5),0.07 (GREEN),0.11 (GREEN),0.14 (GREEN)
+VSI mean,28.1 V,28.1 V,28.2 V
+Resting V,24.9 V,24.4 V,22.5 V
+Sag rate,0.00,0.00,0.00
+Crank-recovery,+0.8σ,+29.1σ,+39.1σ
+Reg. ceiling,+0.8σ,+1.4σ,+0.2σ
+GED2,—,—,—
