@@ -24,3 +24,13 @@ Model: `RidgeClassifier(alpha=1.0)`, 6 features, **LOVO AUROC 0.9267**, Youden t
 py -3 V11.2_ALT/models/V10.5.3_ridge_frozen_champion/V10.5.3_20_5_ALT_predict.py \
       V11.2_ALT/models/V10.5.3_ridge_frozen_champion/V10.5.3_20_5_ALT_training_matrix.csv
 ```
+
+### RUL / survival model (WHEN, fleet)
+
+Params-driven fleet survival bundle in `V11.2_ALT/models/rul_survival_frozen/` (params fit in V11.1_ALT / V10.6.2_ALT):
+
+- **Bundle:** `ALT_rul_survival_bundle.joblib` — Weibull `S(t)=exp(-(t/771.36)^5.1658)` + 10k posterior draws + shelved M1/M2
+- **Loader / CLI:** `ALT_rul_predict.py` — `survival_function(t)`, `median_ttf()`, `rul_band(age_days)`
+- **Legacy (superseded):** `legacy_v5.2/` — V5.2 lifelines fitters (KaplanMeier + 3× WeibullAFT), reference only (needs `lifelines==0.30.0`)
+
+Fleet Weibull: **median TTF 718.5 d, 80% CI [677.3, 774.4]** (25 trucks / 10 events). A fleet-level runway band, **not** a per-truck clock; M0 shipped, M1/M2 shelved.

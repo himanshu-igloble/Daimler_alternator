@@ -1,0 +1,49 @@
+{
+  "created": "2026-07-07",
+  "P1_survival_reconstruction": {
+    "max_abs_diff": 8.450958117717233e-06,
+    "tol": 0.001,
+    "n_rows": 121,
+    "pass": true
+  },
+  "P2_median": {
+    "value_days": 718.5284526160947,
+    "committed": 718.5,
+    "diff_vs_committed": 0.028452616094682526,
+    "diff_vs_fleet_json": 0.028452616094682526,
+    "tol_days": 0.5,
+    "pass": true
+  },
+  "P3_ci80": {
+    "ci80_10_90": [
+      677.3053365662199,
+      774.404828790723
+    ],
+    "committed": [
+      677.3,
+      774.4
+    ],
+    "abs_diff_lower": 0.0053365662199666986,
+    "abs_diff_upper": 0.004828790722967824,
+    "tol_days": 5.0,
+    "ci95_2p5_97p5_for_reference": [
+      654.7951681236395,
+      805.6901683237688
+    ],
+    "matched_level": "80% (10th/90th percentile of posterior median)",
+    "pass": true
+  },
+  "P4_roundtrip_survival_vector": {
+    "bit_identical": true,
+    "pass": true
+  },
+  "environment": {
+    "python": "3.11.9",
+    "sklearn": "1.8.0",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "joblib": "1.5.3",
+    "lifelines": "0.30.0",
+    "platform": "Windows-10-10.0.26100-SP0"
+  }
+}

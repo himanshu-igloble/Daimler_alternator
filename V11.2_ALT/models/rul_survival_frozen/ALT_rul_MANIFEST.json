@@ -1,0 +1,97 @@
+{
+  "artifact": "ALT RUL / survival: shipped fleet Weibull M0 (V11.1_ALT; reproduces V10.6.2)",
+  "created": "2026-07-07",
+  "git_head": "1308b23e8778b32b4e1d32e3eb62dd3e95fde6f7",
+  "environment": {
+    "python": "3.11.9",
+    "sklearn": "1.8.0",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "joblib": "1.5.3",
+    "lifelines": "0.30.0",
+    "platform": "Windows-10-10.0.26100-SP0"
+  },
+  "files": [
+    {
+      "name": "aft_params_M0.json",
+      "bytes": 234,
+      "sha256": "30e9e36911aee1ed8ec3a3734016b1cd951110ccf620c4c27791b054042c0a1e"
+    },
+    {
+      "name": "aft_params_M1.json",
+      "bytes": 236,
+      "sha256": "f38f14553ca7af47eaaca31111d29fcdb198e4d39733824cd17bd82baf73bc47"
+    },
+    {
+      "name": "aft_params_M2.json",
+      "bytes": 246,
+      "sha256": "3bd59a28f5ad2c9144de4333f641e915b1fba1b9a2905857d61eb3322b43a1a0"
+    },
+    {
+      "name": "ALT_rul_predict.py",
+      "bytes": 5637,
+      "sha256": "f0826d427d44323d152ffd3dd2601fe6921390efae64d0fd2975cfa28be8e803"
+    },
+    {
+      "name": "ALT_rul_survival_bundle.joblib",
+      "bytes": 161812,
+      "sha256": "adf9904c60c84f0420d51e633f67c44bf26b8d465646f511e17631ca7a0b4a82"
+    },
+    {
+      "name": "ALT_rul_verification.json",
+      "bytes": 1163,
+      "sha256": "a26903d0303c495c3fb409ef04d5b4c34cb513288b54096d1992ea263d5c2156"
+    },
+    {
+      "name": "fleet_survival_curve.csv",
+      "bytes": 3728,
+      "sha256": "7bfb5aba6ccb96a0bbbd92133705fd6cc643a44211f0036d2174e1a979557d4f"
+    },
+    {
+      "name": "fleet_weibull_params.json",
+      "bytes": 266,
+      "sha256": "583d0cc8484ad1f7d8dbbb2d5a2c74e3bb49aadb46c300f409d0a2219ecc73f6"
+    },
+    {
+      "name": "posterior_samples_M0.csv",
+      "bytes": 409517,
+      "sha256": "d04329640bb8b8d1489a08b053901ed6a0024f7f193ff44dbc516007cb44dbe0"
+    },
+    {
+      "name": "README.md",
+      "bytes": 4532,
+      "sha256": "60addf1d4d00be54a9779015399ca36a119f6d6074928e858359a4dc5df4298b"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "V11.1_ALT\\cache\\weibull\\aft_params_M0.json",
+      "sha256": "30e9e36911aee1ed8ec3a3734016b1cd951110ccf620c4c27791b054042c0a1e"
+    },
+    {
+      "path": "V11.1_ALT\\cache\\weibull\\aft_params_M1.json",
+      "sha256": "f38f14553ca7af47eaaca31111d29fcdb198e4d39733824cd17bd82baf73bc47"
+    },
+    {
+      "path": "V11.1_ALT\\cache\\weibull\\aft_params_M2.json",
+      "sha256": "3bd59a28f5ad2c9144de4333f641e915b1fba1b9a2905857d61eb3322b43a1a0"
+    },
+    {
+      "path": "V11.1_ALT\\cache\\weibull\\fleet_weibull_params.json",
+      "sha256": "583d0cc8484ad1f7d8dbbb2d5a2c74e3bb49aadb46c300f409d0a2219ecc73f6"
+    },
+    {
+      "path": "V11.1_ALT\\cache\\weibull\\fleet_survival_curve.csv",
+      "sha256": "7bfb5aba6ccb96a0bbbd92133705fd6cc643a44211f0036d2174e1a979557d4f"
+    },
+    {
+      "path": "V11.1_ALT\\cache\\weibull\\posterior_samples_M0.csv",
+      "sha256": "d04329640bb8b8d1489a08b053901ed6a0024f7f193ff44dbc516007cb44dbe0"
+    }
+  ],
+  "legacy": {
+    "folder": "legacy_v5.2",
+    "manifest": "legacy_v5.2/legacy_MANIFEST.json",
+    "n_joblibs": 4
+  }
+}
