@@ -1,0 +1,14 @@
+# ALT — last-iterations comparison and champion verification
+_Generated 2026-07-07 by V11.2_ALT_iteration_comparison.py_
+
+**VERDICT:** user claim "V11.2 produced best results" — **VERIFIED, with lineage nuance**: V11.2 is the deepest validation of the champion (AUROC 0.9267, 139/150 pairs, threshold 0.4456) but trained no model; the underlying artifact is the **V10.5.3 ridge, frozen 2026-06-01** and unbeaten through V10.6.x/V11.x/V12.
+
+| iteration   |   headline_auroc | role                        | notes                                                                                         | evidence                                                        |
+|:------------|-----------------:|:----------------------------|:----------------------------------------------------------------------------------------------|:----------------------------------------------------------------|
+| V5.2 Ridge  |           0.907  | runner-up model             | 17-feature ridge                                                                              | V5.2_ALT/results/V10.5.3_20_5_ALT_version_comparison.csv        |
+| V5.2.1      |           0.887  | superseded                  | 11-feature production ridge, spec 1.00                                                        | V5.2_ALT/results/V10.5.3_20_5_ALT_version_comparison.csv        |
+| V10.5.3     |           0.9267 | CHAMPION MODEL (frozen)     | 6-feature ridge, threshold 0.4456; frozen 2026-06-01                                          | V5.2_ALT/models/classification/V10.5.3_20_5_ALT_ridge_spec.json |
+| V10.6.x     |         nan      | alert layer on frozen model | ridge_w=0.7, rules_w=0.3, red recall 6/6 — no new classifier                                  | V10.6_ALT/results/V10.6_ALT_chosen_weights.json                 |
+| V11.1       |           0.9267 | froze the model             | leadership deck; model unchanged                                                              | V11.1_ALT/ (deck + cache reuse V10.5.3 predictions)             |
+| V11.2       |           0.9267 | BEST VALIDATED RESULTS      | validation dossier of the frozen model: 139/150 concordant, PR-AUC 0.94; NO new model trained | V11.2_ALT/results/V11.2_ALT_metric_suite.json                   |
+| V12 (GED)   |           0.9267 | challenge failed            | all 7 GED features REJECTED vs frozen 0.9267 (best delta -0.0067); V12.2 exact repro 25/25    | V12_ALT_GED/results/4_lovo_trial.csv                            |

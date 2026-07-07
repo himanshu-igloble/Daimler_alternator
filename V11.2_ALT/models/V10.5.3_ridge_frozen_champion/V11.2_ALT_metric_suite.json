@@ -1,0 +1,119 @@
+{
+  "_meta": {
+    "version": "V11.2_ALT",
+    "source_csv": "D:/Daimler-starter_motor_alternator_battery/V5.2_ALT/results/V10.5.3_20_5_ALT_ridge_predictions.csv",
+    "threshold": 0.4456,
+    "note": "All metrics computed from LOVO (leave-one-VIN-out) out-of-fold predictions, NOT full-fit probabilities"
+  },
+  "auroc": 0.9267,
+  "auroc_decomposition": {
+    "concordant": 139,
+    "ties": 0,
+    "discordant": 11,
+    "total_pairs": 150,
+    "formula": "(concordant + 0.5*ties) / total_pairs",
+    "interpretation": "P(failed truck ranked above healthy truck on a randomly drawn pair)"
+  },
+  "pr_auc": 0.94,
+  "threshold_metrics": {
+    "threshold": 0.4456,
+    "precision": 0.9,
+    "recall": 0.9,
+    "f1": 0.9,
+    "specificity": 0.9333,
+    "mcc": 0.8333,
+    "brier_raw": 0.1433,
+    "brier_sigmoid": 0.1433,
+    "brier_note": "brier_raw uses ridge_prob directly (already [0,1]); brier_sigmoid uses sigmoid(logit(ridge_prob)) for completeness",
+    "confusion_matrix": {
+      "tp": 9,
+      "fp": 1,
+      "fn": 1,
+      "tn": 14
+    }
+  },
+  "top_k_accuracy": {
+    "k": 10,
+    "failed_in_top_k": 9,
+    "total_failed": 10,
+    "fraction": "9/10",
+    "note": "Trucks ranked in top 10 by LOVO score (25 trucks total); 10 are truly failed"
+  },
+  "recall_at_top_decile": {
+    "top_decile_k": 3,
+    "definition": "top ceil(0.10 * 25)=3 trucks by score",
+    "failed_in_top_decile": 3,
+    "total_failed": 10,
+    "fraction": "3/10",
+    "recall_at_top_decile": 0.3
+  },
+  "spearman_rank_corr": {
+    "rho": 0.7247,
+    "pvalue": 0.0,
+    "note": "Spearman rho between ridge_prob score and binary truth label"
+  },
+  "concordance_index": {
+    "value": 0.9267,
+    "note": "For binary outcomes, concordance index = AUROC (stated equality)"
+  },
+  "bootstrap_auroc_mean": 0.9234,
+  "bootstrap_95ci": [
+    0.8065,
+    1.0
+  ],
+  "permutation_p_value": 0.0,
+  "external_stats_note": "bootstrap_auroc_mean, bootstrap_95ci, permutation_p_value cited from V10.5.3 ridge_spec.json; not recomputed here",
+  "spec_cross_check": {
+    "recall": {
+      "computed": 0.9,
+      "spec": 0.9,
+      "matches": true
+    },
+    "specificity": {
+      "computed": 0.9333,
+      "spec": 0.9333,
+      "matches": true
+    },
+    "precision": {
+      "computed": 0.9,
+      "spec": 0.9,
+      "matches": true
+    },
+    "f1": {
+      "computed": 0.9,
+      "spec": 0.9,
+      "matches": true
+    },
+    "mcc": {
+      "computed": 0.8333,
+      "spec": 0.8333,
+      "matches": true
+    },
+    "brier": {
+      "computed": 0.1433,
+      "spec": 0.1433,
+      "matches": true
+    }
+  },
+  "mean_lead_time_days": {
+    "value_days": 11.0,
+    "vin_count": 2,
+    "total_failed": 10,
+    "fraction": "2/10",
+    "vin_labels": [
+      "VIN1_F_ALT",
+      "VIN10_F_ALT"
+    ],
+    "note": "GED=2 excitation-disturbance channel only; only 2/10 failed trucks emit this signal",
+    "individual_leads_days": [
+      21.0,
+      1.0
+    ]
+  },
+  "framing": {
+    "conservative": "recall 9/10 (90%) of failures caught",
+    "practical": "93% ranking AUROC on trucks the model never saw",
+    "business": "0 false alarms in healthy fleet; the top-10 inspection list catches 9/10 failures",
+    "recommendation": "Communicate the 93% as ranking accuracy AND pair it with '9/10 caught, 0 false alarms'; never present it as bare classification accuracy"
+  }
+}
