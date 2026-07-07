@@ -1,11 +1,15 @@
 # Daimler / BharatBenz Alternator — RUL & Risk Prediction
 
 **Branches:**
-[![main](https://img.shields.io/badge/main-all_3_versions-2ea44f?logo=github)](https://github.com/himanshu-igloble/Daimler_alternator/tree/main)
+[![main](https://img.shields.io/badge/main-all_5_versions-2ea44f?logo=github)](https://github.com/himanshu-igloble/Daimler_alternator/tree/main)
 [![v10.6.2-alt](https://img.shields.io/badge/v10.6.2--alt-honest_baseline-1f6feb?logo=github)](https://github.com/himanshu-igloble/Daimler_alternator/tree/v10.6.2-alt)
 [![v11-alt](https://img.shields.io/badge/v11--alt-lead--time_heuristics-1f6feb?logo=github)](https://github.com/himanshu-igloble/Daimler_alternator/tree/v11-alt)
 [![v11.1-alt-curated](https://img.shields.io/badge/v11.1--alt--curated-covariate_RUL-1f6feb?logo=github)](https://github.com/himanshu-igloble/Daimler_alternator/tree/v11.1-alt-curated)
+[![v11.2-alt](https://img.shields.io/badge/v11.2--alt-validation_dossier-1f6feb?logo=github)](https://github.com/himanshu-igloble/Daimler_alternator/tree/v11.2-alt)
+[![v12-alt-ged](https://img.shields.io/badge/v12--alt--ged-GED_investigation-1f6feb?logo=github)](https://github.com/himanshu-igloble/Daimler_alternator/tree/v12-alt-ged)
 [![v11.1-alt](https://img.shields.io/badge/v11.1--alt-full_dev_branch-9e9e9e?logo=github)](https://github.com/himanshu-igloble/Daimler_alternator/tree/v11.1-alt)
+
+📦 **Deployable models:** see **[MODELS.md](./MODELS.md)** — verified, self-contained classifier + RUL bundles with loaders.
 
 Predictive-maintenance pipeline for the **alternator** of the BharatBenz 5528T heavy-duty truck.
 The project answers three operational questions from on-board CAN-bus telemetry:
