@@ -157,3 +157,38 @@ early signal — post-crank voltage recovery — that catches **one extra failin
 question for good at this sample size: AFT covariates are exposure-confounded, so the covariate-free M0
 (≡ the V10.6.2 fleet curve) wins and β is shelved. None of the three change the structural limit: at n=25
 there is no reliable per-truck "days-to-failure" number. Ship the **rank + window + emergency monitor**.
+
+---
+
+## 7. Loadable model artifact (deployable)
+
+The frozen champion classifier is packaged as a **load-and-predict** joblib bundle — no re-fit needed.
+
+**Path (this branch):** [`V11.2_ALT/models/V10.5.3_ridge_frozen_champion/`](./V11.2_ALT/models/V10.5.3_ridge_frozen_champion)
+
+| File | What it is |
+|---|---|
+| [`V10.5.3_20_5_ALT_champion_bundle.joblib`](./V11.2_ALT/models/V10.5.3_ridge_frozen_champion/V10.5.3_20_5_ALT_champion_bundle.joblib) | fitted sklearn `Pipeline` (median-impute → `StandardScaler` → `RidgeClassifier(α=1.0)`, fit on all 25 trucks) + frozen threshold 0.4456 + tier bands + metadata. Plain dict of standard sklearn objects — loads anywhere `scikit-learn 1.8.x` is installed. |
+| [`V10.5.3_20_5_ALT_predict.py`](./V11.2_ALT/models/V10.5.3_ridge_frozen_champion/V10.5.3_20_5_ALT_predict.py) | loader + CLI — `py -3 V10.5.3_20_5_ALT_predict.py <features_csv>` |
+| `V10.5.3_20_5_ALT_training_matrix.csv` | provenance: the 25-truck feature matrix |
+| `V10.5.3_20_5_ALT_ridge_spec.json` | provenance: the frozen model spec |
+| `V10.5.3_20_5_ALT_lovo_predictions.csv` | provenance: archived LOVO predictions |
+| `V11.2_ALT_metric_suite.json` | provenance: the V11.2 validation metric suite |
+| `V10.5.3_20_5_ALT_verification.json` | packaging parity gates P1–P4 (real numbers) |
+| `V10.5.3_20_5_ALT_MANIFEST.json` | SHA256 of every file + inputs + build env |
+| `README.md` | artifact usage + honesty notes |
+
+**Model:** `RidgeClassifier(alpha=1.0)`, 6 features, **LOVO AUROC 0.9267** (recall 9/10, specificity 14/15),
+Youden threshold **0.4456**; alert tiers on raw prob `red ≥ 0.55 / amber ≥ 0.35 / green`.
+Build + verify scripts: [`V11.2_ALT/src/V11.2_ALT_package_champion.py`](./V11.2_ALT/src/V11.2_ALT_package_champion.py),
+`V11.2_ALT_iteration_comparison.py`, `V11.2_ALT_bundle_smoketest.py`.
+
+```bash
+# score trucks from a features CSV (the bundle imputes NaNs with training medians)
+py -3 V11.2_ALT/models/V10.5.3_ridge_frozen_champion/V10.5.3_20_5_ALT_predict.py \
+      V11.2_ALT/models/V10.5.3_ridge_frozen_champion/V10.5.3_20_5_ALT_training_matrix.csv
+```
+
+> 0.9267 is a **LOVO ranking AUROC** at n=25, not field accuracy; the shipped pipeline is fit on all 25
+> trucks (its resubstitution scores are optimistic by design). Threshold and tier bands are frozen from
+> the 2026-06-01 run.
