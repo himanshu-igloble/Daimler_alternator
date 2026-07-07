@@ -1,0 +1,33 @@
+{
+  "ridge_coefficients": {
+    "vsi_std_ratio_30d": 0.44257,
+    "vsi_dominant_freq": 0.42647,
+    "vsi_spectral_entropy": 0.2447,
+    "bat_charge_delta_trend_right": 0.22399,
+    "vsi_range_trend_last30d": 0.2299,
+    "progressive_drift": -0.20551
+  },
+  "intercept": -0.2,
+  "per_feature_mean_abs_contribution": {
+    "bat_charge_delta_trend_right": 0.17031,
+    "progressive_drift": 0.12086,
+    "vsi_dominant_freq": 0.24099,
+    "vsi_range_trend_last30d": 0.13287,
+    "vsi_spectral_entropy": 0.13803,
+    "vsi_std_ratio_30d": 0.34844
+  },
+  "perm_importance": {
+    "vsi_std_ratio_30d": 0.1547,
+    "vsi_dominant_freq": 0.1053,
+    "vsi_range_trend_last30d": 0.0613,
+    "vsi_spectral_entropy": 0.0573,
+    "progressive_drift": 0.048,
+    "bat_charge_delta_trend_right": 0.034
+  },
+  "compound_vote_weighting": "Emergency early-watch uses EQUAL weights: each of 5 channels (vsi_ceiling, vsi_resid_mean, crank_recovery_t, resting_vsi_mean, ged_churn) casts 1 vote; alarm fires at >=2 votes. Weights are deliberately NOT fitted, because at n=10 failure events any learned weighting would overfit; equal voting is the honest, robust choice.",
+  "weight_basis": "Risk-ranking weights are LEARNED Ridge coefficients (statistical, L2-regularized), not expert-assigned. Zone heuristic (separate M5) used expert weights; the deployed V11.1 ranking does not.",
+  "min_rul_days_nonfailed": 87.0,
+  "max_rul_days_nonfailed": 234.5,
+  "dominance_near_failure": "GED=2 disturbance-state channel fires closest to failure: 21d before failure for VIN1_F_ALT (persistent GED storm) and 1d before failure for VIN10_F_ALT (abrupt). Only 2 of 10 failed trucks show any GED signal; for the remaining 8 the compound channel (vsi_ceiling breach) is the only pre-failure alert, firing 1-586d ahead. As failure approaches, GED excitation is the single most temporally precise heuristic for the minority of trucks with gradual electrical degradation.",
+  "progressive_drift_note": "progressive_drift has a NEGATIVE Ridge coefficient. This is an exposure artifact: healthy trucks observed for longer accumulate more cumulative drift (healthy fleet mean 0.707 vs failed fleet mean 0.096), creating a spurious direction reversal. The model partially corrects for this via the negative coefficient \u2014 effectively penalising trucks with unexpectedly LOW drift relative to their age. The feature has the lowest permutation importance (0.048) and lowest mean absolute contribution in the fleet; it is retained only because the 6-feature set was validated at AUROC 0.927 and removing it would break the frozen V10.5.3 spec."
+}

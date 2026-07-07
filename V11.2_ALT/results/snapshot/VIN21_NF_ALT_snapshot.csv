@@ -1,0 +1,10 @@
+component,Early (2024-03-12),Cond→ORANGE (2025-08-29),Now (2026-02-16)
+Effective zone,YELLOW,ORANGE,ORANGE
+RUL (schedule),675 d (GREEN),174 d (YELLOW),88 d (ORANGE)
+Condition (M5),0.29 (YELLOW),0.43 (ORANGE),0.08 (GREEN)
+VSI mean,28.1 V,27.9 V,28.3 V
+Resting V,nan V,25.0 V,25.2 V
+Sag rate,0.00,0.00,0.00
+Crank-recovery,-0.1σ,-0.1σ,-0.1σ
+Reg. ceiling,-0.2σ,+1.3σ,-0.4σ
+GED2,—,—,—

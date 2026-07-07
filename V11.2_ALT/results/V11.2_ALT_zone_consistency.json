@@ -1,0 +1,89 @@
+{
+  "zone_spread_pct": {
+    "GREEN": {
+      "mean": 83.31,
+      "std": 23.8,
+      "min": 0.0,
+      "max": 100.0
+    },
+    "YELLOW": {
+      "mean": 13.9,
+      "std": 21.94,
+      "min": 0.0,
+      "max": 91.03
+    },
+    "ORANGE": {
+      "mean": 2.25,
+      "std": 5.41,
+      "min": 0.0,
+      "max": 26.23
+    },
+    "RED": {
+      "mean": 0.54,
+      "std": 1.46,
+      "min": 0.0,
+      "max": 5.22
+    }
+  },
+  "failed_reaching_orange_or_red": {
+    "n_failed": 10,
+    "n_reached": 3,
+    "pct_reached": 30.0,
+    "vins": [
+      "VIN10_F_ALT",
+      "VIN1_F_ALT",
+      "VIN8_F_ALT"
+    ]
+  },
+  "nonfailed_in_orange_or_red": {
+    "n_nonfailed": 15,
+    "n_reached": 6,
+    "vins": [
+      "VIN11_NF_ALT",
+      "VIN13_NF_ALT",
+      "VIN15_NF_ALT",
+      "VIN1_NF_ALT",
+      "VIN4_NF_ALT",
+      "VIN9_NF_ALT"
+    ]
+  },
+  "rapid_transitions_yellow_to_red_lt30d": [
+    {
+      "vin_label": "VIN11_NF_ALT",
+      "failed": 0,
+      "days_yellow_to_red": -60
+    }
+  ],
+  "deployed_bands_cutoff_confirmation": {
+    "empirical_bands": {
+      "amber": {
+        "n": 10,
+        "ridge_prob_min": 0.3934,
+        "ridge_prob_max": 0.4919
+      },
+      "green": {
+        "n": 8,
+        "ridge_prob_min": 0.0421,
+        "ridge_prob_max": 0.325
+      },
+      "red": {
+        "n": 7,
+        "ridge_prob_min": 0.6058,
+        "ridge_prob_max": 0.8923
+      }
+    },
+    "cutoffs_confirmed": true,
+    "spec_thresholds": {
+      "green_lt": 0.35,
+      "amber_range": [
+        0.35,
+        0.55
+      ],
+      "red_gte": 0.55
+    },
+    "youden_above_thr": 0.4456
+  },
+  "source_used_for_m5_timeseries": "b_monthly_components_V5.2.1_20_5_ALT_monthly_trajectories.csv",
+  "c5_status": "DROPPED_not_in_monthly_file_weights_renormalized_to_1.0",
+  "verdict": "GLOBAL bands are acceptable for RANKING: deployed green/amber/red risk bands cleanly separate VINs by ridge_prob and empirically confirm the 0.35/0.55 thresholds. The explored 4-zone temporal M5 health system has WEAK sensitivity: only 3/10 (30%) failed VINs ever reached ORANGE or RED, while non-failed trucks also enter those zones. Dynamic per-VIN zones are NOT justified by n=25 data; the data ceiling (n=10 failed) prevents reliable zone-level health-progression discrimination. Recommendation: use V11.1 risk bands for operational deployment; treat 4-zone M5 trajectories as supplemental visual context only, not a standalone alert system."
+}

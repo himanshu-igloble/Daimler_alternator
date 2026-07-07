@@ -1,0 +1,10 @@
+component,Early (2024-03-31),Failure (2025-11-25)
+Effective zone,YELLOW,YELLOW
+RUL (schedule),662 d (GREEN),133 d (YELLOW)
+Condition (M5),0.18 (YELLOW),0.23 (YELLOW)
+VSI mean,27.9 V,28.4 V
+Resting V,23.2 V,24.4 V
+Sag rate,0.00,0.00
+Crank-recovery,-0.1σ,-0.1σ
+Reg. ceiling,-0.3σ,-0.2σ
+GED2,—,—

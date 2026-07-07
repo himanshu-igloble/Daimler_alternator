@@ -1,0 +1,10 @@
+component,Early (2024-05-28),First deviation (2025-11-30),Cond→ORANGE (2025-12-09),Failure (2025-12-16)
+Effective zone,GREEN,YELLOW,YELLOW,YELLOW
+RUL (schedule),664 d (GREEN),161 d (YELLOW),159 d (YELLOW),158 d (YELLOW)
+Condition (M5),0.09 (GREEN),0.15 (YELLOW),0.35 (ORANGE),0.41 (ORANGE)
+VSI mean,28.1 V,28.1 V,28.0 V,28.2 V
+Resting V,24.8 V,nan V,nan V,nan V
+Sag rate,0.00,0.00,0.00,0.00
+Crank-recovery,-0.1σ,-0.1σ,-0.1σ,-0.1σ
+Reg. ceiling,-0.2σ,+1.0σ,+3.2σ,+4.8σ
+GED2,—,—,—,—
