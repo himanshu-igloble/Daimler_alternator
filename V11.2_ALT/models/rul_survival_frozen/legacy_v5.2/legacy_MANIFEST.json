@@ -1,0 +1,39 @@
+{
+  "artifact": "SUPERSEDED V5.2 ALT lifelines survival models (reference only)",
+  "superseded_by": "V10.6.2 / V11.1 fleet Weibull (M0) \u2014 see ../ALT_rul_survival_bundle.joblib",
+  "requires": "lifelines==0.30.0 to unpickle",
+  "created": "2026-07-07",
+  "git_head": "1308b23e8778b32b4e1d32e3eb62dd3e95fde6f7",
+  "files": [
+    {
+      "name": "legacy_predict.py",
+      "bytes": 3624,
+      "sha256": "8b1fc6fa82e4634df90d1fd70dee04ffcfa4cb970f6b67fb0ac14a604639ba76"
+    },
+    {
+      "name": "README.md",
+      "bytes": 1783,
+      "sha256": "eeebf3f8d30f2600cafa04473b9cb00a17497cc86e2f865c5b5a865116f5f84f"
+    },
+    {
+      "name": "V5.2_20_5_ALT_kaplan_meier.joblib",
+      "bytes": 7432,
+      "sha256": "0ee2a0cea73f104d0927c062f3fbaf83234ff9910827959e401ac0d18643e389"
+    },
+    {
+      "name": "V5.2_20_5_ALT_weibull_aft.joblib",
+      "bytes": 12018,
+      "sha256": "798e31cfafd8dbbab9e9fcc52d02ea04aecee9e98f775c224f6a90e15c9442bd"
+    },
+    {
+      "name": "V5.2_20_5_ALT_weibull_aft_silent_failure.joblib",
+      "bytes": 12834,
+      "sha256": "cb19c28861a8de4403b7debc0f75c1bc20f4f98cd68262219b673e7a349e2aba"
+    },
+    {
+      "name": "V5.2_20_5_ALT_weibull_aft_volatility_explosion.joblib",
+      "bytes": 12890,
+      "sha256": "8bd94b251e7ec15c4f974fb092e035d133c5a77d595ba6ada965d27b3d97791b"
+    }
+  ]
+}

@@ -192,3 +192,20 @@ py -3 V11.2_ALT/models/V10.5.3_ridge_frozen_champion/V10.5.3_20_5_ALT_predict.py
 > 0.9267 is a **LOVO ranking AUROC** at n=25, not field accuracy; the shipped pipeline is fit on all 25
 > trucks (its resubstitution scores are optimistic by design). Threshold and tier bands are frozen from
 > the 2026-06-01 run.
+
+### 7b. RUL / survival model (WHEN, fleet)
+
+The fleet survival / RUL is packaged as a params-driven bundle in
+[`V11.2_ALT/models/rul_survival_frozen/`](./V11.2_ALT/models/rul_survival_frozen) (params fit in V11.1_ALT / V10.6.2_ALT):
+
+| File | What it is |
+|---|---|
+| [`ALT_rul_survival_bundle.joblib`](./V11.2_ALT/models/rul_survival_frozen/ALT_rul_survival_bundle.joblib) | frozen Weibull params `S(t)=exp(-(t/771.36)^5.1658)` + 10k posterior draws (CI) + shelved covariate variants M1/M2 |
+| [`ALT_rul_predict.py`](./V11.2_ALT/models/rul_survival_frozen/ALT_rul_predict.py) | loader/CLI — `survival_function(t)`, `median_ttf()`, `rul_band(age_days)` |
+| provenance | `aft_params_M0/M1/M2.json`, `fleet_weibull_params.json`, `fleet_survival_curve.csv`, `posterior_samples_M0.csv`, verification + MANIFEST |
+| [`legacy_v5.2/`](./V11.2_ALT/models/rul_survival_frozen/legacy_v5.2) | **superseded** V5.2 `lifelines` fitters (KaplanMeier + 3× WeibullAFT), reference only (needs `lifelines==0.30.0`) |
+
+**Model:** fleet Weibull, **median TTF 718.5 d, 80% CI [677.3, 774.4]** (25 trucks / 10 events); reconstructed S(t) matches the committed curve to 8e-06.
+
+> This is a **fleet-level cohort runway band, not a per-truck days-to-failure clock** (per-truck RUL is
+> closed at n=25). Covariate variants M1/M2 are exposure-confounded and **shelved** — M0 is the shipped model.
