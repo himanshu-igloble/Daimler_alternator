@@ -1,0 +1,22 @@
+{
+  "per_state_median_vsi": [
+    {
+      "dom_state": 0,
+      "vsi_med": 27.971172332763672,
+      "n": 13643
+    },
+    {
+      "dom_state": 2,
+      "vsi_med": 27.809370040893555,
+      "n": 23
+    },
+    {
+      "dom_state": 3,
+      "vsi_med": 28.044992446899414,
+      "n": 54
+    }
+  ],
+  "spearman_rho": 0.030274559832067758,
+  "spearman_p": 0.0003902043859896656,
+  "verdict": "ENUM (non-monotonic / state-3 is a CAN-fault cluster)"
+}

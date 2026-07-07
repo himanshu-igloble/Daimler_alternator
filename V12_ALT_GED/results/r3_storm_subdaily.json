@@ -1,0 +1,41 @@
+{
+  "VIN1_F_ALT": {
+    "dtf_21": {
+      "n_ged2": 765,
+      "hour_first": 3,
+      "hour_last": 23,
+      "n_episodes": 15,
+      "ged2_minutes": 115.6,
+      "frac_in_first_2h": 0.0497
+    },
+    "dtf_20": {
+      "n_ged2": 1033,
+      "hour_first": 1,
+      "hour_last": 23,
+      "n_episodes": 21,
+      "ged2_minutes": 112.8,
+      "frac_in_first_2h": 0.4327
+    },
+    "dtf_19": {
+      "n_ged2": 6692,
+      "hour_first": 0,
+      "hour_last": 23,
+      "n_episodes": 24,
+      "ged2_minutes": 703.6,
+      "frac_in_first_2h": 0.0492
+    }
+  },
+  "VIN10_F_ALT": {
+    "dtf_1": {
+      "n_ged2": 2897,
+      "hour_first": 10,
+      "hour_last": 19,
+      "n_episodes": 6,
+      "ged2_minutes": 251.9,
+      "frac_in_first_2h": 0.2396,
+      "hours_to_50_events": 0.068,
+      "hours_to_200_events": 0.868,
+      "hours_50_to_200": 0.8
+    }
+  }
+}

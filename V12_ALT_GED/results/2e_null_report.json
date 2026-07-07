@@ -1,0 +1,14 @@
+{
+  "by_failed": [
+    {
+      "failed": false,
+      "null_frac": 0.3310121540242341
+    },
+    {
+      "failed": true,
+      "null_frac": 0.21226930024879784
+    }
+  ],
+  "failed_near_le30d_null": 0.23512150716848365,
+  "failed_base_gt30d_null": 0.21122337168343258
+}

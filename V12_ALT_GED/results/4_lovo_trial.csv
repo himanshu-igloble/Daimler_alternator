@@ -1,0 +1,10 @@
+set,features,auroc,delta
+FAMILY_A,baseline-6,0.9266666666666667,0.0
+FAMILY_A+ged2_acceleration,ged2_acceleration,0.92,-0.00666666666666671
+FAMILY_A+ged2_onset_slope,ged2_onset_slope,0.92,-0.00666666666666671
+FAMILY_A+ged2_rate_idle,ged2_rate_idle,0.92,-0.00666666666666671
+FAMILY_A+ged2_rate_cruise,ged2_rate_cruise,0.92,-0.00666666666666671
+FAMILY_A+resid_oscillation,resid_oscillation,0.9133333333333334,-0.013333333333333308
+FAMILY_A+resid_mean,resid_mean,0.9066666666666667,-0.020000000000000018
+FAMILY_A+resid_slope_30d,resid_slope_30d,0.88,-0.046666666666666745
++ALL_GED,ged2_acceleration;ged2_onset_slope;ged2_rate_idle;ged2_rate_cruise;resid_mean;resid_slope_30d;resid_oscillation,0.7666666666666666,-0.16000000000000014
