@@ -1,0 +1,83 @@
+{
+  "artifact": "ALT frozen champion: V10.5.3 ridge, V11.2-validated",
+  "created": "2026-07-07",
+  "git_head": "7b59ba1d65731b9a1c2be45f0ff277fe76834138",
+  "environment": {
+    "python": "3.11.9",
+    "sklearn": "1.8.0",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "joblib": "1.5.3",
+    "platform": "Windows-10-10.0.26100-SP0"
+  },
+  "files": [
+    {
+      "name": "ALT_last5_iteration_comparison.csv",
+      "bytes": 1044,
+      "sha256": "6b81a2a3ebefbe65e9494f90792a6a224e18f47fb537b1e80627d4565eaa3117"
+    },
+    {
+      "name": "ALT_last5_iteration_comparison.md",
+      "bytes": 2501,
+      "sha256": "bb2cdb6fe06dd2d2d05e9af281c9de74148133976ffa5aeb6e9e0408a4bcd32a"
+    },
+    {
+      "name": "README.md",
+      "bytes": 2569,
+      "sha256": "6008371fa13c4a6ddf72865b06a4f6353766fb2ff6a7970626099ff96c10415e"
+    },
+    {
+      "name": "V10.5.3_20_5_ALT_champion_bundle.joblib",
+      "bytes": 3040,
+      "sha256": "708f19bd89310574523658542b20d00e265a4a82dfa57c47849fe7b9d3158397"
+    },
+    {
+      "name": "V10.5.3_20_5_ALT_lovo_predictions.csv",
+      "bytes": 973,
+      "sha256": "b2db1f7a2d9809f468e4a4462a0ddbf81595172da450dbef3b63b93b497a68bd"
+    },
+    {
+      "name": "V10.5.3_20_5_ALT_predict.py",
+      "bytes": 2348,
+      "sha256": "fe349021308e7ba00ba94c779bd6416cca6418c7edd8ef4fcae802c07147dd07"
+    },
+    {
+      "name": "V10.5.3_20_5_ALT_ridge_spec.json",
+      "bytes": 2386,
+      "sha256": "9e3facd6aa0c8ffafb3de0c3658e7f424ba9f6676df4f34f8400b2c41f2fb6bd"
+    },
+    {
+      "name": "V10.5.3_20_5_ALT_training_matrix.csv",
+      "bytes": 8780,
+      "sha256": "e67ca6611a7a1438a4c44e72a2cd7308bf99b6d694533f4e90e402519eebb621"
+    },
+    {
+      "name": "V10.5.3_20_5_ALT_verification.json",
+      "bytes": 548,
+      "sha256": "7b7845cef4a02aca68556e2e4ee41bdb4763a8c57681fd1892bcd56306ed1070"
+    },
+    {
+      "name": "V11.2_ALT_metric_suite.json",
+      "bytes": 3454,
+      "sha256": "04a80322b18586db29f9bf003dfc83695a9d6021f333c49d43231d2efd5c9527"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "V5.2_ALT\\features\\V5.2_20_5_ALT_selected_features.csv",
+      "sha256": "e67ca6611a7a1438a4c44e72a2cd7308bf99b6d694533f4e90e402519eebb621"
+    },
+    {
+      "path": "V5.2_ALT\\models\\classification\\V10.5.3_20_5_ALT_ridge_spec.json",
+      "sha256": "9e3facd6aa0c8ffafb3de0c3658e7f424ba9f6676df4f34f8400b2c41f2fb6bd"
+    },
+    {
+      "path": "V5.2_ALT\\results\\V10.5.3_20_5_ALT_ridge_predictions.csv",
+      "sha256": "b2db1f7a2d9809f468e4a4462a0ddbf81595172da450dbef3b63b93b497a68bd"
+    },
+    {
+      "path": "V11.2_ALT\\results\\V11.2_ALT_metric_suite.json",
+      "sha256": "04a80322b18586db29f9bf003dfc83695a9d6021f333c49d43231d2efd5c9527"
+    }
+  ]
+}

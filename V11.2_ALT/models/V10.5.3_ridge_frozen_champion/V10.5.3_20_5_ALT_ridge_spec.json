@@ -1,0 +1,100 @@
+{
+  "model": "RidgeClassifier",
+  "alpha": 1.0,
+  "version": "V10.5.3_20_5_ALT",
+  "created": "2026-06-01 10:14:56",
+  "threshold_youden": 0.4456,
+  "lovo_auroc": 0.9267,
+  "lovo_f1": 0.9,
+  "lovo_recall": 0.9,
+  "lovo_specificity": 0.9333,
+  "lovo_precision": 0.9,
+  "lovo_mcc": 0.8333,
+  "lovo_brier": 0.1433,
+  "tp": 9,
+  "fp": 1,
+  "fn": 1,
+  "tn": 14,
+  "n_features": 6,
+  "features": [
+    "vsi_std_ratio_30d",
+    "vsi_dominant_freq",
+    "vsi_spectral_entropy",
+    "bat_charge_delta_trend_right",
+    "vsi_range_trend_last30d",
+    "progressive_drift"
+  ],
+  "bootstrap_n": 200,
+  "bootstrap_auroc_mean": 0.9234,
+  "bootstrap_95ci": [
+    0.8065,
+    1.0
+  ],
+  "permutation_n": 100,
+  "permutation_p_value": 0.0,
+  "permutation_null_mean": 0.4904,
+  "backward_elimination": {
+    "total_subsets_tested": 1024,
+    "best_auroc": 0.9266666666666667,
+    "best_k": 6,
+    "k6_minimal": {
+      "features": [
+        "vsi_std_ratio_30d",
+        "vsi_dominant_freq",
+        "vsi_spectral_entropy",
+        "bat_charge_delta_trend_right",
+        "vsi_range_trend_last30d",
+        "progressive_drift"
+      ],
+      "auroc": 0.9267,
+      "recall": 0.9,
+      "specificity": 0.9333
+    },
+    "k7_parsimonious": {
+      "features": [
+        "vsi_std_ratio_30d",
+        "vsi_dominant_freq",
+        "vsi_spectral_entropy",
+        "bat_charge_delta_trend_right",
+        "vsi_range_trend_last30d",
+        "progressive_drift",
+        "vsi_rpm_slope"
+      ],
+      "auroc": 0.9267,
+      "recall": 0.9,
+      "specificity": 0.9333
+    }
+  },
+  "feature_importance": [
+    {
+      "feature": "vsi_std_ratio_30d",
+      "importance_mean": 0.1547,
+      "importance_std": 0.036
+    },
+    {
+      "feature": "vsi_dominant_freq",
+      "importance_mean": 0.1053,
+      "importance_std": 0.063
+    },
+    {
+      "feature": "vsi_range_trend_last30d",
+      "importance_mean": 0.0613,
+      "importance_std": 0.0346
+    },
+    {
+      "feature": "vsi_spectral_entropy",
+      "importance_mean": 0.0573,
+      "importance_std": 0.0213
+    },
+    {
+      "feature": "progressive_drift",
+      "importance_mean": 0.048,
+      "importance_std": 0.0344
+    },
+    {
+      "feature": "bat_charge_delta_trend_right",
+      "importance_mean": 0.034,
+      "importance_std": 0.0335
+    }
+  ]
+}
